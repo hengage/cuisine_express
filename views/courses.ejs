@@ -1,0 +1,12 @@
+<h1> Courses Offered</h1>
+
+
+<ul>
+    <% coursesOffered.forEach(course => { %>
+        <li>
+            <h3><%= course.title %></h3>
+            <p>$<%= course.cost %></p>
+        <% }); %>
+    </li>
+</ul>
+
