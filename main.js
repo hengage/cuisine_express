@@ -3,6 +3,7 @@ const express = require('express'),
 
 // DATABASE CONNECTION
 const mongoose = require('mongoose');
+// mongoose.Promise = global.Promise;
 
 let dbURL = 'mongodb://localhost:27017/cuisine_db'
 mongoose.connect(dbURL, {
@@ -77,12 +78,14 @@ app.get('/', homeController.homePageController);
 
 app.get('/courses', homeController.showCourseList)
 
-app.get('/contact', homeController.showSignUp);
+app.get('/contact', subscribersController.getSubscriptionPage);
 
+// app.post('/thanks', homeController.postedSignUpForm);
+
+app.post('/thanks', subscribersController.saveSubscribers);
 
 app.get('/subscribers', subscribersController.getAllSubscribers);
 
-app.post('/thanks', homeController.postedSignUpForm);
 
 
 
