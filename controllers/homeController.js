@@ -27,7 +27,7 @@ exports.showCourseList = (req, res) => {
 }
 
 exports.showSignUp = (req, res) => {
-    console.log(req.body);
+    console.log(req.body.name);
     res.render('contact');
 };
 
