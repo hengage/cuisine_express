@@ -19,31 +19,6 @@ db.once('open', () => {
 const config = require('./config')
 
 // REQUIRE MODELS
-const Subscriber = require('./models/subscriberModel');
-
-// INSTANTIATE NEW USER DOCUMENTS
-// const subscriber1 = new Subscriber({
-//     name: 'hengage',
-//     email: "henry@chi.com",
-// });
-
-// subscriber1.save((error, savedDocument) => {
-//     if (error) { 
-//         return handleError(error) 
-//         console.log(error);
-//     };
-//     console.log(savedDocument)
-// });
-
-// Subscriber.create(
-//     {
-//         name: 'chizoba',
-//         email: 'lace@lace.com'
-//     }, (error, savedDocument) => {
-//         if (error) console.log(error);
-//         console.log(savedDocument);
-//     }
-// );
 
 process.on('SIGINT', function() {
     mongoose.connection.close(function () {
