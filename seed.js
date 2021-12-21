@@ -30,7 +30,7 @@ Subscriber.deleteMany()
         console.log('Deleted exisiting subscribers');
 });
 
-var commands = [];
+let commands = [];
 
 contacts.forEach((contact) => {
     commands.push(Subscriber.create({

@@ -53,13 +53,12 @@ app.get('/', homeController.homePageController);
 
 app.get('/courses', homeController.showCourseList)
 
-app.get('/contact', subscribersController.getSubscriptionPage);
+app.get('/subscribers', subscribersController.getAllSubscribers);
 
-// app.post('/thanks', homeController.postedSignUpForm);
+app.get('/subscribe', subscribersController.getSubscriptionPage);
 
 app.post('/thanks', subscribersController.saveSubscribers);
 
-app.get('/subscribers', subscribersController.getAllSubscribers);
 
 
 
