@@ -24,11 +24,6 @@ exports.showCourseList = (req, res) => {
     res.render('courses', {
         coursesOffered: courses
     });
-}
-
-exports.showSignUp = (req, res) => {
-    console.log(req.body.name);
-    res.render('contact');
 };
 
 exports.postedSignUpForm = (req, res) => {
