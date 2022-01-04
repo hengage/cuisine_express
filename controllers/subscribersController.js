@@ -10,6 +10,7 @@ const Subscriber = require('../models/subscriberModel');
 //     });
 // };
 
+// Get all subcscribers
 exports.getAllSubscribers = (req, res) => {
     Subscriber.find({})
     .exec()
