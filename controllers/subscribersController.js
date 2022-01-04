@@ -30,8 +30,8 @@ exports.getAllSubscribers = (req, res) => {
 
 
 exports.getSubscriptionPage = (req, res) => {
-    // Renders the contact page for visitors to susbcribe to newsletter
-    res.render('contact');
+    // Renders the 'subscribe' page for visitors to susbcribe to newsletter
+    res.render('subscribe');
 };
 
 exports.saveSubscribers = (req, res) => {
