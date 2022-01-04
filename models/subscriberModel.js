@@ -13,6 +13,15 @@ const newsletterSubscriberSchema = new mongoose.Schema({
     } 
 });
 
+newsletterSubscriberSchema.methods.getInfo = () => {
+    `Name: ${this.name} | Email ${this.email} `
+}
+
+newsletterSubscriberSchema.methods.findLocalSubscribers = () => {
+    this.model('Subscriber')
+}
+
+
 module.exports = mongoose.model(
     'Subscriber', newsletterSubscriberSchema
 );
