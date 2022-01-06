@@ -1,5 +1,6 @@
 const express = require('express'),
-    app = express();
+    app = express(),
+    router = express.Router();
 
 // DATABASE CONNECTION
 const mongoose = require('mongoose');
@@ -44,25 +45,26 @@ app.set('view engine', 'ejs')
 // STATIC FILES
 app.use('/public', express.static('public'));
 
+//Router 
+app.use('/', router);
 
 // BODY PARSING
 app.use(express.urlencoded({extended:false}))
-.use(express.json())
+.use(express.json());
 
 // ROUTES
-app.get('/', homeController.homePageController);
+router.get('/', homeController.homePageController);
 
-app.get('/courses', homeController.showCourseList)
+router.get('/courses', homeController.showCourseList)
 
-app.get('/subscribers', subscribersController.getAllSubscribers);
+router.get('/subscribers', subscribersController.getAllSubscribers);
 
-app.get('/subscribe', subscribersController.getSubscriptionPage);
-
+router.get('/subscribe', subscribersController.getSubscriptionPage);
 app.post('/thanks', subscribersController.saveSubscribers);
 
-app.get('/users', usersController.index, usersController.indexView);
+router.get('/users', usersController.index, usersController.indexView);
 
-app.get('/users/signup', usersController.newUser);
+router.get('/users/signup', usersController.newUser);
 app.post('/users/create', usersController.create, usersController.redirectView);
 
 
