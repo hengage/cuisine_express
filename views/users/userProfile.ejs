@@ -1,0 +1,28 @@
+<h2><%= user.fullName %></h2>
+
+<ul>
+    <li><%= user.fullName %></li><br>
+    <li><%= user.email %></li><br>
+    <li><%= user.password %></li><br>
+</ul>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <td><%= user.fullName %></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td><%= user.email %></td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td><%= user.fullName %></td>
+    </tr>
+</table>
+
+
+<% if (user.subscribedAccount) { %>
+    <h4>This user is a subscriber</h4>
+<% } %>
+

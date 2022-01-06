@@ -67,6 +67,8 @@ router.get('/users', usersController.index, usersController.indexView);
 router.get('/users/signup', usersController.newUser);
 app.post('/users/create', usersController.create, usersController.redirectView);
 
+router.get('/users/:id', usersController.userProfile, usersController.userProfileView);
+
 
 
 

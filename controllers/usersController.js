@@ -35,7 +35,7 @@ module.exports = {
         User.create(userParams)
             .then(user => {
                 res.locals.redirect = '/users';
-                res.locals.user;
+                res.locals.user = user;
                 next()
             })
             .catch(error => {
@@ -48,5 +48,22 @@ module.exports = {
         let redirectPath = res.locals.redirect;
         if (redirectPath) res.redirect(redirectPath);
         else next();
+    },
+
+    userProfile : (req, res, next) => {
+        let userId = req.params.id;
+        User.findById(userId)
+            .then(user => {
+                res.locals.user = user;
+                next();
+            })
+            .catch(error => {
+                console.log(`Error fetching user by ID: ${error.message}`)
+                next(error);
+            });
+    },
+
+    userProfileView: (req, res) => {
+        res.render('users/userProfile');
     }
 }
