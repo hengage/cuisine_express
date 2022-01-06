@@ -62,6 +62,9 @@ app.post('/thanks', subscribersController.saveSubscribers);
 
 app.get('/users', usersController.index, usersController.indexView);
 
+app.get('/users/signup', usersController.newUser);
+app.post('/users/create', usersController.create, usersController.redirectView);
+
 
 
 
