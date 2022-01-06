@@ -10,15 +10,19 @@ const newsletterSubscriberSchema = new mongoose.Schema({
         required: true,
         lowercase: true,
         unique: true
-    } 
+    },
+    courses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course'
+    }] 
 });
 
-newsletterSubscriberSchema.methods.getInfo = () => {
-    `Name: ${this.name} | Email ${this.email} `
+newsletterSubscriberSchema.methods.getInfo = function() {
+    return `Name: ${this.name} | Email ${this.email} `
 }
 
-newsletterSubscriberSchema.methods.findLocalSubscribers = () => {
-    this.model('Subscriber')
+newsletterSubscriberSchema.methods.findLocalSubscribers = function(){
+    return this.model('Subscriber')
 }
 
 
