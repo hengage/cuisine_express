@@ -25,7 +25,3 @@ exports.showCourseList = (req, res) => {
         coursesOffered: courses
     });
 };
-
-exports.postedSignUpForm = (req, res) => {
-    res.render('thanks');
-};

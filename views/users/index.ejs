@@ -1,0 +1,28 @@
+<h2>Users</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr>
+            <td>henry</td>
+            <td>henry@henry.com</td>
+            <td>user1</td>
+        </tr>
+    </tbody>
+
+
+    <tbody>
+        <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.fullName %></td>
+                <td><%= user.email %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

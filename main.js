@@ -30,7 +30,8 @@ process.on('SIGINT', function() {
 const layouts = require('express-ejs-layouts');
 
 // Require Controllers
-const homeController = require("./controllers/homeController")
+const homeController = require("./controllers/homeController");
+const usersController = require('./controllers/usersController');
     errorController = require("./controllers/errorController"),
     subscribersController = require('./controllers/subscribersController');
 
@@ -59,6 +60,7 @@ app.get('/subscribe', subscribersController.getSubscriptionPage);
 
 app.post('/thanks', subscribersController.saveSubscribers);
 
+app.get('/users', usersController.index, usersController.indexView);
 
 
 
