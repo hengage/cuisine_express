@@ -65,5 +65,46 @@ module.exports = {
 
     userProfileView: (req, res) => {
         res.render('users/userProfile');
-    }
+    },
+
+    editUserProfile: (req, res, next) => {
+        let userId = req.params.id;
+        User.findById(userId)
+            .then(user => {
+                res.render('users/editUserProfile', {
+                    user: user
+                });
+            })
+            .catch(error => {
+                console.log(`Error fetching user by ID: ${error.message}`);
+                next(error);
+            })
+    },
+
+    updateUserProfile: (req, res, next) => {
+        let userId = req.params.id,
+        userParams = {
+            name: {
+                first: req.body.first,
+                last: req.body.last
+            },
+            email: req.body.email,
+            password: req.body.password
+        };
+
+        User.findByIdAndUpdate(userId, {
+            $set: userParams
+        })
+            .then(user => {
+                res.locals.redirect = `/users/${userId}`;
+                res.locals.user = user;
+                next();
+            })
+            .catch(error => {
+                console.log(`Error updating user by ID: ${error.message}`);
+                next(error);
+            })
+    },
+
+   
 }

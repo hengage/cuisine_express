@@ -1,6 +1,7 @@
 const express = require('express'),
     app = express(),
-    router = express.Router();
+    router = express.Router(),
+    methodOverride = require('method-override');
 
 // DATABASE CONNECTION
 const mongoose = require('mongoose');
@@ -30,11 +31,24 @@ process.on('SIGINT', function() {
 
 const layouts = require('express-ejs-layouts');
 
+// Method Override
+// router.use(methodOverride('_method', {
+//     methods: ["POST", "GET"]
+// }));
+
+// app.use(methodOverride('X-HTTP-Method-Override'))
+
+app.use(methodOverride('_method', {
+    methods: ["POST", "GET"]
+}));
+
 // Require Controllers
 const homeController = require("./controllers/homeController");
 const usersController = require('./controllers/usersController');
     errorController = require("./controllers/errorController"),
     subscribersController = require('./controllers/subscribersController');
+
+
 
 app.set("port", process.env.PORT || 3000);
 
@@ -67,7 +81,23 @@ router.get('/users', usersController.index, usersController.indexView);
 router.get('/users/signup', usersController.newUser);
 app.post('/users/create', usersController.create, usersController.redirectView);
 
-router.get('/users/:id', usersController.userProfile, usersController.userProfileView);
+router.get(
+    '/users/:id', 
+    usersController.userProfile, 
+    usersController.userProfileView
+);
+
+// router.get('/users/:id/edit', usersController.editUserProfile);
+// router.put('/users/:id/update', usersController.updateUserProfile);
+
+router.get('/users/:id/edit', usersController.editUserProfile);
+app.put(
+    '/users/:id/update', 
+    usersController.updateUserProfile, 
+    usersController.redirectView
+);
+
+
 
 
 
