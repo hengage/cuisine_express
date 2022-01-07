@@ -28,6 +28,8 @@
 
 <a href="<%= `/users/${user.id}/edit` %>">Edit Profile</a> <br><br>
 
-
+<button onclick="return confirm('Are you sure you want to delete your account?') ">
+    <a href="<%= `/users/${user.id}/delete?_method=DELETE` %>">Delete account</a>
+</button>
 
 <a href="<%= `/users` %>">All users</a>

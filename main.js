@@ -97,7 +97,11 @@ app.put(
     usersController.redirectView
 );
 
-
+router.delete(
+    '/users/:id/delete', 
+    usersController.deleteUSer, 
+    usersController.redirectView
+);
 
 
 
