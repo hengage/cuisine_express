@@ -1,7 +1,8 @@
 const express = require('express'),
     app = express(),
     router = express.Router(),
-    methodOverride = require('method-override');
+    methodOverride = require('method-override'),
+    expressMongoDb = require('express-mongo-db');
 
 // DATABASE CONNECTION
 const mongoose = require('mongoose');
@@ -18,9 +19,9 @@ db.once('open', () => {
     console.log('Succesfully connected to mongodb using mongoose');
 })
 
-const config = require('./config')
+// const config = require('./config')
+// app.use(expressMongoDb(config))
 
-// REQUIRE MODELS
 
 process.on('SIGINT', function() {
     mongoose.connection.close(function () {
@@ -87,9 +88,6 @@ router.get(
     usersController.userProfileView
 );
 
-// router.get('/users/:id/edit', usersController.editUserProfile);
-// router.put('/users/:id/update', usersController.updateUserProfile);
-
 router.get('/users/:id/edit', usersController.editUserProfile);
 app.put(
     '/users/:id/update', 
@@ -102,8 +100,6 @@ router.delete(
     usersController.deleteUSer, 
     usersController.redirectView
 );
-
-
 
 
 // ERROR HANDLING

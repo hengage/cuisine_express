@@ -9,10 +9,15 @@ const courseSchema = new Mongoose.Schema({
         unique: true
     },
     description: {
-        type: string,
+        type: String,
         required: true
     },
-    items: []
+    price: {
+        type: Number,
+        default: 0,
+        min: [0, "Course price cannot be negative"]
+    },
+    timestamps: true
 });
 
 module.exports = mongoose.model('Course', courseSchema);
