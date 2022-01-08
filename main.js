@@ -52,11 +52,10 @@ process.on('SIGINT', function() {
 const layouts = require('express-ejs-layouts');
 
 // Method Override
-// router.use(methodOverride('_method', {
-//     methods: ["POST", "GET"]
-// }));
+router.use(methodOverride('_method', {
+    methods: ["POST", "GET"]
+}));
 
-// app.use(methodOverride('X-HTTP-Method-Override'))
 
 app.use(methodOverride('_method', {
     methods: ["POST", "GET"]
@@ -100,6 +99,13 @@ router.get('/users', usersController.index, usersController.indexView);
 
 router.get('/users/signup', usersController.newUser);
 app.post('/users/create', usersController.create, usersController.redirectView);
+
+router.get('/users/login', usersController.login);
+app.post(
+    '/users/login', 
+    usersController.authenticate, 
+    usersController.redirectView
+);
 
 router.get(
     '/users/:id', 

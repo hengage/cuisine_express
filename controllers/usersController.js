@@ -14,6 +14,15 @@ const  getUserParams = (body) => {
     };
 
 module.exports = {
+    redirectView: (req, res, next) => {
+        // Function for redirection to another page 
+        // after a successful crud operation
+
+        let redirectPath = res.locals.redirect;
+        if (redirectPath) res.redirect(redirectPath);
+        else next();
+    },
+
     index:  (req, res, next) => {
         User.find({})
          .then(users => {
@@ -39,20 +48,51 @@ module.exports = {
 
         User.create(userParams)
             .then(user => {
+                req.flash("success", `Thank you for signing up ${user.fullName}`)
                 res.locals.redirect = '/users';
                 res.locals.user = user;
                 next()
             })
             .catch(error => {
+                res.locals.redirect = "users/signup"
                 console.log(`Error saving user: ${error.message}`);
+                req.flash("error", `Signup unsuccessful. ${error.message}` )
                 next(error);
             });
     },
 
-    redirectView: (req, res, next) => {
-        let redirectPath = res.locals.redirect;
-        if (redirectPath) res.redirect(redirectPath);
-        else next();
+    login: (req, res) => {
+        res.render('users/login')
+    },
+
+    authenticate: (req, res, next) => {
+        User.findOne({
+            email: req.body.email
+        })
+            .then(user => {
+                console.log(`Email: ${req.body.email} | Password: ${req.body.password}`)
+                console.log(user.password)
+                console.log(user.email)
+
+                if (user && user.password === req.body.password) {
+                    req.flash('success', 'Login successful');
+                    res.locals.redirect = '/';
+                    res.locals.user = user;
+                    next()
+                } else {
+                    req.flash(
+                        'error', 
+                        "Your account or password is incorrect.",
+                        "Please try again or contact your system administrator!"
+                    );
+                    res.locals.redirect = '/users/login';
+                    next();
+                }
+            })
+            .catch(error => {
+                console.log(`Error logging in user: ${error.message}`);
+                next(error);
+            })
     },
 
     userProfile : (req, res, next) => {
@@ -94,11 +134,13 @@ module.exports = {
             $set: userParams
         })
             .then(user => {
+                req.flash("success", `Profile update successful!`);
                 res.locals.redirect = `/users/${userId}`;
                 res.locals.user = user;
                 next();
             })
             .catch(error => {
+                req.flash("error", `Profile update failed!`);
                 console.log(`Error updating user by ID: ${error.message}`);
                 next(error);
             })
@@ -108,6 +150,7 @@ module.exports = {
         let userId = req.params.id;
         User.findByIdAndRemove(userId)
             .then(() => {
+                req.flash("success", `Account deleted successfully!`);
                 res.locals.redirect = '/users';
                 next();
             })
