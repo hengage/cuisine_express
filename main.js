@@ -4,6 +4,25 @@ const express = require('express'),
     methodOverride = require('method-override'),
     expressMongoDb = require('express-mongo-db');
 
+// Sessions and flash messages
+const expressSession = require('express-session'),
+    cookieParser = require('cookie-parser'),
+    connectFlash = require('connect-flash');
+ 
+router.use(cookieParser('secret_passcode'));
+router.use(expressSession({
+    secret: 'secret_passcode',
+    cookie: {maxAge:50000},
+    resave: false,
+    saveUninitialized: false
+}));
+router.use(connectFlash());
+
+router.use((req, res, next) => {
+    res.locals.flashMessages = req.flash();
+    next();
+});
+
 // DATABASE CONNECTION
 const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;

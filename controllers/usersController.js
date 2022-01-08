@@ -1,4 +1,17 @@
 const User = require('../models/userModel');
+ 
+const  getUserParams = (body) => {
+    return {
+        name: {
+            first: body.first,
+            last: body.last
+        },
+
+        email: body.email,
+        password: body.password
+    }
+        
+    };
 
 module.exports = {
     index:  (req, res, next) => {
@@ -22,15 +35,7 @@ module.exports = {
     },
 
     create: (req, res, next) => {
-        let userParams ={
-            name: {
-                first: req.body.first,
-                last: req.body.last
-            },
-
-            email: req.body.email,
-            password: req.body.password
-        };
+        let userParams = getUserParams(req.body);
 
         User.create(userParams)
             .then(user => {
@@ -83,14 +88,7 @@ module.exports = {
 
     updateUserProfile: (req, res, next) => {
         let userId = req.params.id,
-        userParams = {
-            name: {
-                first: req.body.first,
-                last: req.body.last
-            },
-            email: req.body.email,
-            password: req.body.password
-        };
+        userParams = getUserParams(req.body);
 
         User.findByIdAndUpdate(userId, {
             $set: userParams
