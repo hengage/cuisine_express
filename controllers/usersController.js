@@ -11,7 +11,7 @@ const  getUserParams = (body) => {
         password: body.password
     }
         
-    };
+};
 
 module.exports = {
     redirectView: (req, res, next) => {
@@ -69,30 +69,40 @@ module.exports = {
         User.findOne({
             email: req.body.email
         })
-            .then(user => {
-                console.log(`Email: ${req.body.email} | Password: ${req.body.password}`)
-                console.log(user.password)
-                console.log(user.email)
-
-                if (user && user.password === req.body.password) {
-                    req.flash('success', 'Login successful');
-                    res.locals.redirect = '/';
-                    res.locals.user = user;
-                    next()
-                } else {
-                    req.flash(
-                        'error', 
-                        "Your account or password is incorrect.",
-                        "Please try again or contact your system administrator!"
-                    );
-                    res.locals.redirect = '/users/login';
-                    next();
-                }
-            })
-            .catch(error => {
-                console.log(`Error logging in user: ${error.message}`);
-                next(error);
-            })
+        .then(user => {
+            if (user) {
+                user.passwordComparison(req.body.password)
+                    .then(passwordsMatch => {
+                        if (passwordsMatch) {
+                            console.log(req.body.password);
+                            console.log(user.email);
+                            console.log(user.password);
+                            req.flash('success', 'Login successul!');
+                            res.locals.redirect = '/';
+                            res.locals.user = user;
+                            next();
+                        } else {
+                            console.log(req.body.password);
+                            console.log(user.email);
+                            console.log(user.password);
+                            req.flash('error', 'Incorrect password');
+                            res.locals.redirect = '/users/login';
+                            next()
+                        }
+                    });
+            } else {
+                req.flash('error', 
+                    'No account exists with this email.',
+                    'Please sign up if you do not have an account'
+                );
+                res.locals.redirect = '/users/login';
+                next();
+            } ;
+        }).catch(error => {
+            console.log(`Error logging in user: ${error.message}`);
+            next(error);
+        })
+            
     },
 
     userProfile : (req, res, next) => {
