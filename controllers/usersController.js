@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const { check, validationResult} = require("express-validator")
  
 const  getUserParams = (body) => {
     return {
@@ -43,18 +44,42 @@ module.exports = {
         res.render('users/newUser')
     },
 
+    validateNewUser: (req, res, next) => {[
+        check('email', 'invalid email').not().isEmpty(),
+        check(
+            'password', 
+            'Your password must be at least 5 characters')
+                .not().isEmpty().isLength({min: 5}),
+        check('first', 'First name should not be empty').not().isEmpty(),
+        check('lasst', 'Last name should not be empty').not().isEmpty()
+    ];
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            // console.log(`Error: ${errors.array()}`);
+            let messages = errors.array().map(e => e.msg);
+            req.flash("error", messages.join(" and "));
+            req.skip = true;
+            res.locals.redirect = "users/signup";
+            console.log('erorrrrrr');
+            next();
+        } else {
+            next();
+        };
+    },
+
     create: (req, res, next) => {
         let userParams = getUserParams(req.body);
 
         User.create(userParams)
             .then(user => {
-                req.flash("success", `Thank you for signing up ${user.fullName}`)
+                req.flash("success", `Thank you for signing up ${user.name.first}`)
                 res.locals.redirect = '/users';
                 res.locals.user = user;
                 next()
             })
             .catch(error => {
-                res.locals.redirect = "users/signup"
+                res.locals.redirect = "users/signup";
                 console.log(`Error saving user: ${error.message}`);
                 req.flash("error", `Signup unsuccessful. ${error.message}` )
                 next(error);
@@ -74,17 +99,11 @@ module.exports = {
                 user.passwordComparison(req.body.password)
                     .then(passwordsMatch => {
                         if (passwordsMatch) {
-                            console.log(req.body.password);
-                            console.log(user.email);
-                            console.log(user.password);
                             req.flash('success', 'Login successul!');
                             res.locals.redirect = '/';
                             res.locals.user = user;
                             next();
                         } else {
-                            console.log(req.body.password);
-                            console.log(user.email);
-                            console.log(user.password);
                             req.flash('error', 'Incorrect password');
                             res.locals.redirect = '/users/login';
                             next()

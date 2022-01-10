@@ -1,8 +1,13 @@
 const express = require('express'),
     app = express(),
     router = express.Router(),
+    layouts = require('express-ejs-layouts'),
     methodOverride = require('method-override'),
-    expressMongoDb = require('express-mongo-db');
+    expressMongoDb = require('express-mongo-db'),
+    { check, validationResult} = require("express-validator");
+
+
+// router.use(expressValidator());
 
 // Sessions and flash messages
 const expressSession = require('express-session'),
@@ -22,6 +27,7 @@ router.use((req, res, next) => {
     res.locals.flashMessages = req.flash();
     next();
 });
+
 
 // DATABASE CONNECTION
 const mongoose = require('mongoose');
@@ -49,9 +55,8 @@ process.on('SIGINT', function() {
     });
 });
 
-const layouts = require('express-ejs-layouts');
 
-// Method Override
+// Forms method Override
 router.use(methodOverride('_method', {
     methods: ["POST", "GET"]
 }));
@@ -61,9 +66,10 @@ app.use(methodOverride('_method', {
     methods: ["POST", "GET"]
 }));
 
+
 // Require Controllers
-const homeController = require("./controllers/homeController");
-const usersController = require('./controllers/usersController');
+const homeController = require("./controllers/homeController"),
+    usersController = require('./controllers/usersController'),
     errorController = require("./controllers/errorController"),
     subscribersController = require('./controllers/subscribersController');
 
@@ -78,12 +84,16 @@ app.set('view engine', 'ejs')
 // STATIC FILES
 app.use('/public', express.static('public'));
 
-//Router 
+// Use router 
 app.use('/', router);
 
 // BODY PARSING
 app.use(express.urlencoded({extended:false}))
 .use(express.json());
+
+// Forms validation.
+// router.use(expressValidator());
+
 
 // ROUTES
 router.get('/', homeController.homePageController);
@@ -98,7 +108,12 @@ app.post('/thanks', subscribersController.saveSubscribers);
 router.get('/users', usersController.index, usersController.indexView);
 
 router.get('/users/signup', usersController.newUser);
-app.post('/users/create', usersController.create, usersController.redirectView);
+app.post(
+    '/users/create', 
+    usersController.validateNewUser,
+    usersController.create,
+    usersController.redirectView
+);
 
 router.get('/users/login', usersController.login);
 app.post(
