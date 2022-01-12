@@ -1,10 +1,13 @@
 const express = require('express'),
     app = express(),
-    router = express.Router(),
+    expressRouter = express.Router(),
     layouts = require('express-ejs-layouts'),
     methodOverride = require('method-override'),
     expressMongoDb = require('express-mongo-db'),
     { check, validationResult} = require("express-validator");
+
+const usersController = require('./controllers/usersController');
+const router = require('./routes/index');
 
 
 // router.use(expressValidator());
@@ -14,20 +17,23 @@ const expressSession = require('express-session'),
     cookieParser = require('cookie-parser'),
     connectFlash = require('connect-flash');
  
-router.use(cookieParser('secret_passcode'));
-router.use(expressSession({
+expressRouter.use(cookieParser('secret_passcode'));
+expressRouter.use(expressSession({
     secret: 'secret_passcode',
     cookie: {maxAge:50000},
     resave: false,
     saveUninitialized: false
 }));
-router.use(connectFlash());
+expressRouter.use(connectFlash());
 
-router.use((req, res, next) => {
+expressRouter.use((req, res, next) => {
     res.locals.flashMessages = req.flash();
     next();
 });
 
+
+
+app.use('/', expressRouter);
 
 // DATABASE CONNECTION
 const mongoose = require('mongoose');
@@ -57,7 +63,7 @@ process.on('SIGINT', function() {
 
 
 // Forms method Override
-router.use(methodOverride('_method', {
+expressRouter.use(methodOverride('_method', {
     methods: ["POST", "GET"]
 }));
 
@@ -65,13 +71,6 @@ router.use(methodOverride('_method', {
 app.use(methodOverride('_method', {
     methods: ["POST", "GET"]
 }));
-
-
-// Require Controllers
-const homeController = require("./controllers/homeController"),
-    usersController = require('./controllers/usersController'),
-    errorController = require("./controllers/errorController"),
-    subscribersController = require('./controllers/subscribersController');
 
 
 
@@ -84,67 +83,31 @@ app.set('view engine', 'ejs')
 // STATIC FILES
 app.use('/public', express.static('public'));
 
-// Use router 
-app.use('/', router);
 
 // BODY PARSING
 app.use(express.urlencoded({extended:false}))
 .use(express.json());
+
+
+// Use router 
+app.use('/', router);
+
 
 // Forms validation.
 // router.use(expressValidator());
 
 
 // ROUTES
-router.get('/', homeController.homePageController);
-
-router.get('/courses', homeController.showCourseList)
-
-router.get('/subscribers', subscribersController.getAllSubscribers);
-
-router.get('/subscribe', subscribersController.getSubscriptionPage);
-app.post('/thanks', subscribersController.saveSubscribers);
-
-router.get('/users', usersController.index, usersController.indexView);
-
-router.get('/users/signup', usersController.newUser);
-app.post(
-    '/users/create', 
-    usersController.validateNewUser,
-    usersController.create,
-    usersController.redirectView
-);
-
-router.get('/users/login', usersController.login);
-app.post(
-    '/users/login', 
-    usersController.authenticate, 
-    usersController.redirectView
-);
-
-router.get(
-    '/users/:id', 
-    usersController.userProfile, 
-    usersController.userProfileView
-);
-
-router.get('/users/:id/edit', usersController.editUserProfile);
-app.put(
-    '/users/:id/update', 
-    usersController.updateUserProfile, 
-    usersController.redirectView
-);
-
-router.delete(
-    '/users/:id/delete', 
-    usersController.deleteUSer, 
-    usersController.redirectView
-);
 
 
-// ERROR HANDLING
-app.use(errorController.pageNotFoundError)
-.use(errorController.internalServerError);
+// router.get('/subscribers', subscribersController.getAllSubscribers);
+
+// router.get('/subscribe', subscribersController.getSubscriptionPage);
+// app.post('/thanks', subscribersController.saveSubscribers);
+
+
+
+
 
 
 app.listen(app.get("port"), () => {
@@ -152,3 +115,4 @@ app.listen(app.get("port"), () => {
         `Server running at ${app.get("port")}`
     );
 })
+

@@ -98,6 +98,8 @@ module.exports = {
             if (user) {
                 user.passwordComparison(req.body.password)
                     .then(passwordsMatch => {
+                        console.log(req.body.password);
+                        console.log(user.password);
                         if (passwordsMatch) {
                             req.flash('success', 'Login successul!');
                             res.locals.redirect = '/';
