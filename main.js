@@ -6,6 +6,7 @@ const express = require('express'),
     expressMongoDb = require('express-mongo-db'),
     { check, validationResult} = require("express-validator");
 
+
 require('dotenv').config();
 
 const usersController = require('./controllers/usersController');
