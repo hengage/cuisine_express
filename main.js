@@ -6,6 +6,8 @@ const express = require('express'),
     expressMongoDb = require('express-mongo-db'),
     { check, validationResult} = require("express-validator");
 
+require('dotenv').config();
+
 const usersController = require('./controllers/usersController');
 const router = require('./routes/index');
 
@@ -39,7 +41,7 @@ app.use('/', expressRouter);
 const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
 
-let dbURL = 'mongodb://localhost:27017/cuisine_db'
+let dbURL = process.env.DATABASE_URL
 mongoose.connect(dbURL, {
     useNewURLParser: true
 });
@@ -74,7 +76,7 @@ app.use(methodOverride('_method', {
 
 
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT);
 
 // VIEW SETUP
 app.set('view engine', 'ejs')
@@ -95,19 +97,6 @@ app.use('/', router);
 
 // Forms validation.
 // router.use(expressValidator());
-
-
-// ROUTES
-
-
-// router.get('/subscribers', subscribersController.getAllSubscribers);
-
-// router.get('/subscribe', subscribersController.getSubscriptionPage);
-// app.post('/thanks', subscribersController.saveSubscribers);
-
-
-
-
 
 
 app.listen(app.get("port"), () => {
