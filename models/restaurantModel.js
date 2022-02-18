@@ -29,6 +29,9 @@ const mongoose = require('mongoose'),
             min: [10000, "Zip code too short"],
             max: 99999,
             required: true
-        }
+        },
+    });
 
-    })
+    module.exports = mongoose.model(
+        'Restaurant', restaurantSchema
+    );
