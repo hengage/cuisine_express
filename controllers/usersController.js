@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const passport = require('passport');
 const { check, validationResult} = require("express-validator")
  
 const  getUserParams = (body) => {
@@ -68,24 +69,6 @@ module.exports = {
         };
     },
 
-    // create: (req, res, next) => {
-    //     let userParams = getUserParams(req.body);
-
-    //     User.create(userParams)
-    //         .then(user => {
-    //             req.flash("success", `Thank you for signing up ${user.name.first}`)
-    //             res.locals.redirect = '/users';
-    //             res.locals.user = user;
-    //             next()
-    //         })
-    //         .catch(error => {
-    //             res.locals.redirect = "users/signup";
-    //             console.log(`Error saving user: ${error.message}`);
-    //             req.flash("error", `Signup unsuccessful. ${error.message}` )
-    //             next(error);
-    //         });
-    // },
-
     create: (req, res, next) => {
         if (req.skip) next();
 
@@ -108,43 +91,16 @@ module.exports = {
         res.render('users/login')
     },
 
-    authenticate: (req, res, next) => {
-        User.findOne({
-            email: req.body.email
-        })
-        .then(user => {
-            if (user) {
-                user.passwordComparison(req.body.password)
-                    .then(passwordsMatch => {
-                        console.log(req.body.password);
-                        console.log(user.password);
-                        if (passwordsMatch) {
-                            req.flash('success', 'Login successul!');
-                            res.locals.redirect = '/';
-                            res.locals.user = user;
-                            next();
-                        } else {
-                            req.flash('error', 'Incorrect password');
-                            res.locals.redirect = '/users/login';
-                            next()
-                        }
-                    });
-            } else {
-                req.flash('error', 
-                    'No account exists with this email.',
-                    'Please sign up if you do not have an account'
-                );
-                res.locals.redirect = '/users/login';
-                next();
-            } ;
-        }).catch(error => {
-            console.log(`Error logging in user: ${error.message}`);
-            next(error);
-        })
-            
-    },
+    
 
-    userProfile : (req, res, next) => {
+    authenticate: passport.authenticate('local', {
+        successRedirect: '/',
+        successFlash: 'Logged in',
+        failureRedirect: '/users/login',
+        failureFlash: 'Failed to login'
+    }),
+
+    userProfile: (req, res, next) => {
         let userId = req.params.id;
         User.findById(userId)
             .then(user => {
