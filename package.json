@@ -26,6 +26,8 @@
     "mongodb": "^2.2.16",
     "mongodb-version-list": "^1.0.0",
     "mongoose": "^5.13.13",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "passport-local-mongoose": "^6.1.0"
   }
 }

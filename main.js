@@ -9,17 +9,11 @@ const express = require('express'),
 
 require('dotenv').config();
 
-const usersController = require('./controllers/usersController');
-const router = require('./routes/index');
-
-
-// router.use(expressValidator());
-
 // Sessions and flash messages
 const expressSession = require('express-session'),
     cookieParser = require('cookie-parser'),
     connectFlash = require('connect-flash');
- 
+
 expressRouter.use(cookieParser('secret_passcode'));
 expressRouter.use(expressSession({
     secret: 'secret_passcode',
@@ -34,6 +28,11 @@ expressRouter.use((req, res, next) => {
     next();
 });
 
+
+const router = require('./routes/index');
+
+
+// router.use(expressValidator());
 
 
 app.use('/', expressRouter);
