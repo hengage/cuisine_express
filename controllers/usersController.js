@@ -68,22 +68,40 @@ module.exports = {
         };
     },
 
-    create: (req, res, next) => {
-        let userParams = getUserParams(req.body);
+    // create: (req, res, next) => {
+    //     let userParams = getUserParams(req.body);
 
-        User.create(userParams)
-            .then(user => {
-                req.flash("success", `Thank you for signing up ${user.name.first}`)
+    //     User.create(userParams)
+    //         .then(user => {
+    //             req.flash("success", `Thank you for signing up ${user.name.first}`)
+    //             res.locals.redirect = '/users';
+    //             res.locals.user = user;
+    //             next()
+    //         })
+    //         .catch(error => {
+    //             res.locals.redirect = "users/signup";
+    //             console.log(`Error saving user: ${error.message}`);
+    //             req.flash("error", `Signup unsuccessful. ${error.message}` )
+    //             next(error);
+    //         });
+    // },
+
+    create: (req, res, next) => {
+        if (req.skip) next();
+
+        let newUser = new User(getUserParams(req.body));
+
+        User.register(newUser, req.body.password, (error, user) => {
+            if (user) {
+                req.flash("success", `${user.fullName}'s account created successfully`);
                 res.locals.redirect = '/users';
-                res.locals.user = user;
+                next();
+            }   else {
+                req.flash("error", `Failed to create user account because: ${error.message}.`);
+                res.locals.redirect = 'users/signup';
                 next()
-            })
-            .catch(error => {
-                res.locals.redirect = "users/signup";
-                console.log(`Error saving user: ${error.message}`);
-                req.flash("error", `Signup unsuccessful. ${error.message}` )
-                next(error);
-            });
+            }
+        });
     },
 
     login: (req, res) => {
