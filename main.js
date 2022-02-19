@@ -29,6 +29,16 @@ expressRouter.use((req, res, next) => {
 });
 
 
+const passport = require('passport');
+
+expressRouter.use(passport.initialize())
+.use(passport.session());
+
+const User = require('./models/userModel');
+passport.use(User.createStrategy())
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 const router = require('./routes/index');
 
 
