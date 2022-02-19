@@ -10,9 +10,19 @@
     <nav>
         <a href="/">Home</a>
 
-        <a href="/users/login">Login</a>
 
-        <a href="/users/signup">Register</a>
+
+        <% if (loggedIn) { %>
+            Logged in as <a href="<%= `/users/${currentUser._id}` %>">
+                <%= currentUser.fullName %>
+            </a>
+        <%} else {%>
+            <a href="/users/login">Login</a>
+
+            <a href="/users/signup">Register</a>
+
+        <% } %>
+
     </nav>
 
     <div class="flash-message">

@@ -39,6 +39,13 @@ passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
+expressRouter.use((req, res, next) => {
+    res.locals.loggedIn = req.isAuthenticated();
+    res.locals.currentUser = req.user;
+    next();
+});
+
+
 const router = require('./routes/index');
 
 
