@@ -100,6 +100,13 @@ module.exports = {
         failureFlash: 'Failed to login'
     }),
 
+    logout: (req, res, next) => {
+        req.logout();
+        req.flash("success", "You have been logged out!");
+        res.locals.redirect = '/';
+        next();
+    },
+
     userProfile: (req, res, next) => {
         let userId = req.params.id;
         User.findById(userId)

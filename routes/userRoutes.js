@@ -20,6 +20,8 @@ router.post(
     usersController.redirectView
 );
 
+router.get('/logout', usersController.logout, usersController.redirectView)
+
 router.get(
     '/:id', 
     usersController.userProfile, 
