@@ -3,11 +3,13 @@
 const Restaurant = require('../models/restaurantModel');
 const passport = require('passport');
 
-const  getUserParams = (body) => {
+const  getRestaurantParams = (body) => {
     return {
         name: body.name,
         email: body.email,
-        password: body.password
+        password: body.password,
+        address: body.address,
+        zipCode: body.zipCode
     }
 };
 
@@ -22,19 +24,29 @@ module.exports = {
         else next();
     },
 
+    newRestaurant: (req, res) => {
+        res.render('restaurant/newRestaurant')
+    },
+
     create: (req, res, next) => {
         if (req.skip) next();
 
-        let newRestaurant = new Restaurant(getUserParams(req.body));
+        let newRestaurant = new Restaurant(getRestaurantParams(req.body));
 
         Restaurant.register(newRestaurant, req.body.password, (error, restaurant) => {
             if (restaurant) {
-                req.flash("success", `${user.name}'s account created successfully`);
+                req.flash(
+                    "success", 
+                    `Your business, ${newRestaurant.name} has been successfully registered`
+                );
                 res.locals.redirect = '/';
                 next();
             }   else {
-                req.flash("error", `Failed to create restaurant account because: ${error.message}.`);
-                res.locals.redirect = 'restaurant/signup';
+                req.flash(
+                    "error",
+                    `Failed to create restaurant account because: ${error.message}.`
+                );
+                res.locals.redirect = '/restaurant/register';
                 next()
             }
         });

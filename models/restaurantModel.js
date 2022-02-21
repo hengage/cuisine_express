@@ -4,6 +4,8 @@
 // console.log(Country.getAllCountries())
 // console.log(State.getAllStates())
 
+const passportLocalMongoose = require('passport-local-mongoose')
+
 const mongoose = require('mongoose'),
     restaurantSchema = new mongoose.Schema({
         name: {
@@ -16,10 +18,10 @@ const mongoose = require('mongoose'),
             lowercase: true,
             unique: true
         },
-        password: {
-            type: String,
-            required: true
-        },
+        // password: {
+        //     type: String,
+        //     required: true
+        // },
         address: {
             type: String,
             required: true
