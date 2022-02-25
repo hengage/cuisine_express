@@ -51,4 +51,8 @@ module.exports = {
             }
         });
     },
+
+    dashboardView: (req, res, next) => {
+        res.render('restaurant//dashboard');
+    }
 }
