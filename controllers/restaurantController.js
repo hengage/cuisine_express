@@ -52,7 +52,18 @@ module.exports = {
         });
     },
 
+    login: (req, res) => {
+        res.render('restaurant/login');
+    },
+
+    authenticate: passport.authenticate('restaurantLocal', {
+        successRedirect: '/restaurant/dashboard',
+        successFlash: 'Logged in',
+        failureRedirect: '/restaurant/login',
+        failureFlash: 'Failed to login'
+    }, console.log('businesssss')),
+
     dashboardView: (req, res, next) => {
-        res.render('restaurant//dashboard');
+        res.render('restaurant/dashboard');
     }
 }

@@ -91,14 +91,14 @@ module.exports = {
         res.render('users/login')
     },
 
-    
-
-    authenticate: passport.authenticate('local', {
+    authenticate: passport.authenticate('userLocal', {
         successRedirect: '/',
         successFlash: 'Logged in',
         failureRedirect: '/users/login',
-        failureFlash: 'Failed to login'
-    }),
+        failureFlash: 'Failed to loginNNN'
+    },console.log('userrrrrr')),
+
+
 
     logout: (req, res, next) => {
         req.logout();
