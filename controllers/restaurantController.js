@@ -65,5 +65,35 @@ module.exports = {
 
     dashboardView: (req, res, next) => {
         res.render('restaurant/dashboard');
+    },
+
+    // dashboard: (req, res, next) => {
+    //     let restaurantId = req.params.id;
+    //     Restaurant.findById(restaurantId)
+    //         .then(restaurant => {
+    //             res.locals.restaurant = restaurant;
+    //             next();
+    //         })
+    //         .catch(error => {
+    //             console.log('Error fetching profile')
+    //             next(error);
+    //         })
+    // }
+
+    dashboard: (req, res, next) => {
+        let name = req.params.name;
+        let id = req.params.id;
+        Restaurant.findOne({name}).where('id', id)
+            .then(restaurant => {
+                res.locals.restaurant = restaurant;
+                next();
+            })
+            .catch(error => {
+                console.log('Error fetching profile')
+                res.locals.redirect = '/'
+                next(error);
+            })
     }
+
+
 }

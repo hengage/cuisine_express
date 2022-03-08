@@ -10,6 +10,9 @@ router.post('/create-business', restaurantController.create, restaurantControlle
 router.get('/login', restaurantController.login)
 .post('/login', restaurantController.authenticate, restaurantController.redirectView)
 
-router.get('/dashboard', restaurantController.dashboardView);
+// router.get('/dashboard/:id', restaurantController.dashboardView, restaurantController.dashboard);
+router.get('/dashboard/:name', restaurantController.dashboard, restaurantController.dashboardView,);
+
+
 
 module.exports = router
