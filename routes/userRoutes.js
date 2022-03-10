@@ -14,10 +14,16 @@ router.post(
 );
 
 router.get('/login', usersController.login);
+// router.post(
+//     '/login', 
+//     usersController.authenticate, 
+//     usersController.redirectView
+// );
 router.post(
     '/login', 
     usersController.authenticate, 
-    usersController.redirectView
+    usersController.redirectView,
+    usersController.userLoginRedirect
 );
 
 router.get('/logout', usersController.logout, usersController.redirectView)
