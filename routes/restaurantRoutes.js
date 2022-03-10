@@ -13,6 +13,7 @@ const  getRestaurantParams = (body) => {
 };
     
 
+router.get('/all', restaurantController.getAllRestaurants, restaurantController.getAllRestaurantsView)
 
 router.get('/register', restaurantController.newRestaurant );
 
@@ -28,6 +29,7 @@ router.get('/login', restaurantController.login)
 
 // router.get('/dashboard/:id', restaurantController.dashboardView, restaurantController.dashboard);
 router.get('/dashboard/:name', restaurantController.dashboard, restaurantController.dashboardView,);
+
 
 
 

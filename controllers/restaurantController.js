@@ -96,6 +96,22 @@ module.exports = {
                 console.log('Error showing dashboard');
                 next(error);
             })
+    },
+
+    getAllRestaurants: (req, res, next) => {
+        Restaurant.find({})
+         .then(restaurants => {
+            res.locals.restaurants = restaurants;
+                next();
+         })
+         .catch(error => {
+            console.log(`Error fetching restaurant ${error.message}`);
+            next(error);
+        });
+    },
+
+    getAllRestaurantsView: (req, res) => {
+        res.render('restaurant/allRestaurants')
     }
 
 
