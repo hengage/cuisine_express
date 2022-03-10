@@ -57,11 +57,15 @@ module.exports = {
     },
 
     authenticate: passport.authenticate('restaurantLocal', {
-        successRedirect: '/restaurant/dashboard',
+        successRedirect: `/` ,
         successFlash: 'Logged in',
         failureRedirect: '/restaurant/login',
         failureFlash: 'Failed to login'
-    }, console.log('businesssss')),
+    }), 
+        
+    restaurantLoginRedirect: (req, res) => {
+        res.redirect(`/restaurant/dashboard/${req.body.email}`)
+    },
 
     dashboardView: (req, res, next) => {
         res.render('restaurant/dashboard');
@@ -89,8 +93,7 @@ module.exports = {
                 next();
             })
             .catch(error => {
-                console.log('Error fetching profile')
-                res.locals.redirect = '/'
+                console.log('Error showing dashboard');
                 next(error);
             })
     }
