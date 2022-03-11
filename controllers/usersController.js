@@ -92,7 +92,7 @@ module.exports = {
     },
 
     authenticate: passport.authenticate('userLocal', {
-        // successRedirect: '/',
+        successRedirect: '/',
         successFlash: 'Logged in',
         failureRedirect: '/users/login',
         failureFlash: 'Failed to loginNNN'
@@ -102,8 +102,8 @@ module.exports = {
         let email = req.body.email
         User.findOne({email})
             .then(user => {
-                res.redirect(`/users/${user.id}`)
-                next();
+                return res.redirect(`/users/${user.id}`)
+                next()
             })
             .catch(error => {
                 console.log(`Error fetching user by ID: ${error.message}`)
