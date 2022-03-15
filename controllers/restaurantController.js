@@ -121,7 +121,25 @@ module.exports = {
     },
 
     getAllRestaurantsView: (req, res) => {
-        res.render('restaurant/allRestaurants')
+        res.render('restaurant/allRestaurants');
+    },
+
+    restaurantDetailsView: (req, res) => {
+        res.render('restaurant/restaurantDetails');
+    },
+
+    restaurantDetails: (req, res, next) => {
+        let name = req.params.name;
+        let id = req.params.id;
+        Restaurant.findOne({name})
+            .then(restaurant => {
+                res.locals.restaurant = restaurant;
+                next();
+            })
+            .catch(error => {
+                console.log(`Error fetching ${restaurnt.name}'s details`);
+                next(error);
+            })
     }
 
 

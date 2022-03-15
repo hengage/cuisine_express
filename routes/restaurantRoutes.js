@@ -30,6 +30,8 @@ router.get('/login', restaurantController.login)
 // router.get('/dashboard/:id', restaurantController.dashboardView, restaurantController.dashboard);
 router.get('/dashboard/:name', restaurantController.dashboard, restaurantController.dashboardView,);
 
+router.get('/:name/', restaurantController.restaurantDetails, restaurantController.restaurantDetailsView,)
+
 
 
 
