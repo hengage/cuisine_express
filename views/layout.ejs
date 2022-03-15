@@ -15,9 +15,18 @@
 
         <% if (loggedIn) { %>
             Logged in as 
+
+            <!-- Check if logged in user is a private user or business -->
+            <% if (currentUser.zipCode) { %>
+                <a href="<%= `/restaurant/dashboard/${currentUser.name}` %>">
+                    <%= currentUser.name %>
+                </a>
+            <% } else { %>
                 <a href="<%= `/users/${currentUser._id}` %>">
-                <%= currentUser.fullName %>
-            </a>
+                    <%= currentUser.fullName %>
+                </a>
+            <% } %>
+
             
             <a href="/users/logout">Log out</a>
         <%} else {%>
