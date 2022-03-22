@@ -2,6 +2,8 @@
 
 const Restaurant = require('../models/restaurantModel');
 const passport = require('passport');
+const showError = require('../error');
+const errorController = require('../controllers/errorController')
 
 const  getRestaurantParams = (body) => {
     return {
@@ -87,6 +89,11 @@ module.exports = {
         let id = req.params.id;
         Restaurant.findOne({name}).where('id', id)
             .then(restaurant => {
+                
+                
+                if(!restaurant) {
+                    return showError(res, 404)
+                }
                 res.locals.restaurant = restaurant;
                 next();
             })
