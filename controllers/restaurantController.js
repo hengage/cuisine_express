@@ -81,18 +81,6 @@ module.exports = {
         res.render('restaurant/dashboard');
     },
 
-    // dashboard: (req, res, next) => {
-    //     let restaurantId = req.params.id;
-    //     Restaurant.findById(restaurantId)
-    //         .then(restaurant => {
-    //             res.locals.restaurant = restaurant;
-    //             next();
-    //         })
-    //         .catch(error => {
-    //             console.log('Error fetching profile')
-    //             next(error);
-    //         })
-    // }
 
     dashboard: (req, res, next) => {
         let name = req.params.name;
@@ -140,7 +128,5 @@ module.exports = {
                 console.log(`Error fetching ${restaurnt.name}'s details`);
                 next(error);
             })
-    }
-
-
+    },
 }

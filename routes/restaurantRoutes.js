@@ -1,16 +1,6 @@
 const express = require('express'),
     router  = express.Router(),
     restaurantController = require('../controllers/restaurantController');
-
-const  getRestaurantParams = (body) => {
-    return {
-        // name: body.name,
-        // email: body.email,
-        // password: body.password,
-        // address: body.address,
-        // zipCode: body.zipCode
-    }
-};
     
 
 router.get('/all', restaurantController.getAllRestaurants, restaurantController.getAllRestaurantsView)
@@ -28,11 +18,17 @@ router.get('/login', restaurantController.login)
 )
 
 // router.get('/dashboard/:id', restaurantController.dashboardView, restaurantController.dashboard);
-router.get('/dashboard/:name', restaurantController.dashboard, restaurantController.dashboardView,);
+router.get(
+    '/dashboard/:name',
+    restaurantController.dashboard, 
+    restaurantController.dashboardView,
+);
 
-router.get('/:name/', restaurantController.restaurantDetails, restaurantController.restaurantDetailsView,)
-
-
+router.get(
+    '/:name', 
+    restaurantController.restaurantDetails, 
+    restaurantController.restaurantDetailsView,
+)
 
 
 module.exports = router

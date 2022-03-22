@@ -10,18 +10,19 @@ const mongoose = require('mongoose'),
             type: String,
             default: randomstring.generate({
             length: 12,
-            charset: 'alphanumeric'
+            charset: 'alphanumeric',
+            unique: true
           })},
 
-        user: {
-            type : mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
+        // user: {
+        //     type : mongoose.Schema.Types.ObjectId,
+        //     ref: 'User'
+        // },
 
-        restaurant: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Restaurant'
-        }
+        // restaurant: {
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: 'Restaurant'
+        // }
         }, {
             timestamps: true
     });
