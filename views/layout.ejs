@@ -8,23 +8,35 @@
 </head>
 <body>
     <nav>
-        <a href="/">Home</a>
+
+        <h3><a href="/">Cuisine Express</a></h3>
 
 
 
         <% if (loggedIn) { %>
             Logged in as 
+
+            <!-- Check if logged in user is a private user or business -->
+            <% if (currentUser.zipCode) { %>
+                <a href="<%= `/restaurant/dashboard/${currentUser.name}` %>">
+                    <%= currentUser.name %>
+                </a>
+            <% } else { %>
                 <a href="<%= `/users/${currentUser._id}` %>">
-                <%= currentUser.fullName %>
-            </a>
+                    <%= currentUser.fullName %>
+                </a>
+            <% } %>
+
             
             <a href="/users/logout">Log out</a>
         <%} else {%>
-            <a href="/users/login">Login</a>
+            <a href="/login">Login</a>
 
-            <a href="/users/signup">Register</a>
+            <a href="/register">Register</a>
 
         <% } %>
+
+        <a href="/restaurant/all">All restaurants</a>
 
     </nav>
 

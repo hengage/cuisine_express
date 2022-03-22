@@ -2,6 +2,8 @@
 
 const Restaurant = require('../models/restaurantModel');
 const passport = require('passport');
+const showError = require('../error');
+const errorController = require('../controllers/errorController')
 
 const  getRestaurantParams = (body) => {
     return {
@@ -57,13 +59,81 @@ module.exports = {
     },
 
     authenticate: passport.authenticate('restaurantLocal', {
-        successRedirect: '/restaurant/dashboard',
+        // successRedirect: `/` ,
         successFlash: 'Logged in',
         failureRedirect: '/restaurant/login',
         failureFlash: 'Failed to login'
-    }, console.log('businesssss')),
+    }), 
+        
+    restaurantLoginRedirect: (req, res) => {
+        let email = req.body.email
+        Restaurant.findOne({email})
+            .then(restaurant => {
+                return res.redirect(`/restaurant/dashboard/${restaurant.name}`)
+                next()
+            })
+            .catch(error => {
+                console.log(`Error fetching restaurant by ID: ${error.message}`)
+                next(error);
+            });
+        // res.redirect(`/restaurant/dashboard/${req.body.email}`)
+    },
 
     dashboardView: (req, res, next) => {
         res.render('restaurant/dashboard');
-    }
+    },
+
+
+    dashboard: (req, res, next) => {
+        let name = req.params.name;
+        let id = req.params.id;
+        Restaurant.findOne({name}).where('id', id)
+            .then(restaurant => {
+                
+                
+                if(!restaurant) {
+                    return showError(res, 404)
+                }
+                res.locals.restaurant = restaurant;
+                next();
+            })
+            .catch(error => {
+                console.log('Error showing dashboard');
+                next(error);
+            })
+    },
+
+    getAllRestaurants: (req, res, next) => {
+        Restaurant.find({})
+         .then(restaurants => {
+            res.locals.restaurants = restaurants;
+                next();
+         })
+         .catch(error => {
+            console.log(`Error fetching restaurant ${error.message}`);
+            next(error);
+        });
+    },
+
+    getAllRestaurantsView: (req, res) => {
+        res.render('restaurant/allRestaurants');
+    },
+
+    restaurantDetailsView: (req, res) => {
+        res.render('restaurant/restaurantDetails');
+    },
+
+    restaurantDetails: (req, res, next) => {
+        let name = req.params.name;
+        let id = req.params.id;
+        Restaurant.findOne({name})
+            .then(restaurant => {
+                res.locals.restaurant = restaurant;
+                next();
+            })
+            .catch(error => {
+                console.log(`Error fetching ${restaurnt.name}'s details`);
+                next(error);
+            })
+    },
 }

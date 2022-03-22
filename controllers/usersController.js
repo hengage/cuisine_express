@@ -98,7 +98,18 @@ module.exports = {
         failureFlash: 'Failed to loginNNN'
     },console.log('userrrrrr')),
 
-
+    userLoginRedirect: (req, res, next) => {
+        let email = req.body.email
+        User.findOne({email})
+            .then(user => {
+                return res.redirect(`/users/${user.id}`)
+                next()
+            })
+            .catch(error => {
+                console.log(`Error fetching user by ID: ${error.message}`)
+                next(error);
+            });
+    },
 
     logout: (req, res, next) => {
         req.logout();

@@ -32,6 +32,9 @@ const mongoose = require('mongoose'),
             max: 99999,
             required: true
     },
+    reservation: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "Reservation"
+    }],
 });
 
 restaurantSchema.plugin(passportLocalMongoose, {

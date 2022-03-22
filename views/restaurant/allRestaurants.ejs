@@ -1,0 +1,17 @@
+<h1>Restaurants</h1>
+
+
+<ul>
+    <% restaurants.forEach(restaurant => { %>
+    <li>
+        
+        <p>
+            
+            <a href="<%= `/restaurant/${restaurant.name}` %>"><%= restaurant.name %></a>
+        </p>
+        <p><%= restaurant.email %></p>
+        <p><%= restaurant.id %></p>
+        <p><%= restaurant.password %></p>
+    </li>
+    <% }) %>
+</ul>
