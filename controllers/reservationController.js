@@ -1,3 +1,5 @@
+"use strict";
+
 const Reservation = require('../models/reservationModel');
 const User = require('../models/userModel')
 
@@ -7,7 +9,6 @@ const  getReservationParams = (body) => {
     }
         
 };
-
 module.exports = {
 
     redirectView: (req, res, next) => {
@@ -42,8 +43,9 @@ module.exports = {
 
     makeReservation: (req, res, next) => {
         if (req.skip) next();
-    
-        User.findOne({email})
+        
+        let user = req.userId;
+        User.findOne({user})
             .then(user => {
                 let newReservation = new Reservation();
     
@@ -51,7 +53,7 @@ module.exports = {
                     if (reservation) {
                         req.flash("success", `Your reservation has been made`);
                         console.log("success", `Your reservation has been made`);
-                        res.locals.redirect = '/';
+                        res.locals.redirect = '/reservation';
                         next();
                     }   else {
                         req.flash("error", `'failed to create reservation: ${error.message}.`);
@@ -62,6 +64,22 @@ module.exports = {
                 })
             })
     },
+
+    usersReservation: (req, res, next) => {
+        Reservation.find({})
+            .then(reservations => {
+                res.locals.reservations = reservations;
+                next();
+        })
+            .catch(error => {
+                console.log(`Error fetching data ${error.message}`);
+                next(error);
+       })
+    },
+
+    usersReservationView: (req, res) => {
+       res.render('reservation/reservation')
+    }    
 
 }
 

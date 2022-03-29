@@ -9,4 +9,6 @@ router.post(
     reservationController.redirectView,
 )
 
+router.get('', reservationController.usersReservation, reservationController.usersReservationView)
+
 module.exports = router

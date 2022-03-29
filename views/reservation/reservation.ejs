@@ -1,0 +1,14 @@
+<h2>Your reservations</h2>
+
+<% if (reservations) {%>
+    <% reservations.forEach(reservation => { %>
+        <ul>
+            <li>
+                <%= reservation.code %>
+            </li>
+        </ul>
+    <% }) %>
+<% } else { %> 
+    <p>You have no table reservation</p>
+<% } %>
+
