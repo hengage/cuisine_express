@@ -14,15 +14,15 @@ const mongoose = require('mongoose'),
             unique: true
           })},
 
-        // user: {
-        //     type : mongoose.Schema.Types.ObjectId,
-        //     ref: 'User'
-        // },
+        user: {
+            type : mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
 
-        // restaurant: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: 'Restaurant'
-        // }
+        restaurant: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Restaurant'
+        }
         }, {
             timestamps: true
     });

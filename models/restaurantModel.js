@@ -35,7 +35,14 @@ const mongoose = require('mongoose'),
     reservation: [{
         type: mongoose.Schema.Types.ObjectId, ref: "Reservation"
     }],
+   
 });
+
+// restaurantSchema.virtual('reservation', {
+//     ref: 'Reservation',
+//     localField: '_id'
+//     foreignField: 'restaurant'
+// });
 
 restaurantSchema.plugin(passportLocalMongoose, {
     usernameField: 'email'

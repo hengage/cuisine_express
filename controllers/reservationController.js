@@ -44,24 +44,54 @@ module.exports = {
     makeReservation: (req, res, next) => {
         if (req.skip) next();
         
-        let user = req.userId;
+        // let user = req.userId;
+        const user = req.currentUser;
         User.findOne({user})
             .then(user => {
-                let newReservation = new Reservation();
-    
-                newReservation.save(newReservation, (error, reservation) => {
-                    if (reservation) {
+                // console.log('The user is:', user)
+                const {code, restaurant} = req.body
+                let newReservation = new Reservation({code, user, restaurant});
+                // let newReservation = new Reservation({ user, });
+
+                newReservation.save()
+                .then((reservation) => {
                         req.flash("success", `Your reservation has been made`);
                         console.log("success", `Your reservation has been made`);
+                        console.log('The new reservation is', reservation)
+
+                        user.reservation.push(reservation)
+                        user.save()
+                        console.log('=========================== \n')
+                        // console.log(reservation)
+                        console.log('=========================== \n')
+                        console.log(user.reservation)
+
+                        const userById =  User.findById({_id: reservation.user});
+                        // console.log(userById.name)
+                        // userById.reservation.push(reservation);
+                        // userById.save();
+
                         res.locals.redirect = '/reservation';
                         next();
-                    }   else {
-                        req.flash("error", `'failed to create reservation: ${error.message}.`);
-                        // res.locals.redirect = 'users/signup';
-                        console.log('failed to create reservation')
-                        next()
-                    }
+                        
+                }).catch((error)=> {
+                    console.log('Reservation failed because:', error)
+                    next(error)
                 })
+    
+                // newReservation.save(newReservation, (error, reservation) => {
+                //     if (reservation) {
+                //         req.flash("success", `Your reservation has been made`);
+                //         console.log("success", `Your reservation has been made`);
+                //         res.locals.redirect = '/reservation';
+                //         next();
+                //     }   else {
+                //         req.flash("error", `'failed to create reservation: ${error.message}.`);
+                //         // res.locals.redirect = 'users/signup';
+                //         console.log('failed to create reservation')
+                //         next()
+                //     }
+                // })
             })
     },
 
