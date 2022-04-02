@@ -1,26 +1,36 @@
-<h2><%= user.fullName %></h2>
+<h2>
+    <%= user.fullName %>
+</h2>
 
 <ul>
-    <li><%= user.fullName %></li><br>
-    <li><%= user.email %></li><br>
+    <li>
+        <%= user.fullName %>
+    </li><br>
+    <li>
+        <%= user.email %>
+    </li><br>
 
     <% if (user.reservation) {%>
 
         <h3>Your reservations</h3>
-        <li><%= user.reservation %></li><br>
+        <li>
+            <%= user.reservation %>
+        </li><br>
 
-        <% user.reservation.forEach(reservation => { %>
-            <ul>
+        <ul>
+            <% user.reservation.forEach(reservation=> { %>
+
                 <li>
                     <%= reservation.code %>
-                    <%= reservation.user %>
-                    <%= reservation.restaurant %>
+                        <%= reservation.user %>
+                            <%= reservation.restaurant %>
                 </li>
-            </ul>
-        <% }) %>
-    <% } else { %> 
-        <p>You have no table reservation</p>
-    <% } %>
+                <% }) %>
+
+        </ul>
+        <% } else { %>
+            <p>You have no table reservation</p>
+            <% } %>
 </ul>
 
 

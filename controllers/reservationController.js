@@ -1,13 +1,14 @@
 "use strict";
 
 const Reservation = require('../models/reservationModel');
+const Restaurant = require('../models/restaurantModel');
 const User = require('../models/userModel')
 
-const  getReservationParams = (body) => {
+const getReservationParams = (body) => {
     return {
         code: body.code,
     }
-        
+
 };
 module.exports = {
 
@@ -22,11 +23,11 @@ module.exports = {
 
     // makeReservation: (req, res, next) => {
     //     if (req.skip) next();
-    
+
     //     User.findOne({email})
     //         .then(user => {
     //             let newReservation = new Reservation();
-    
+
     //             Reservation.register(newReservation, (error, reservation) => {
     //                 if (reservation) {
     //                     req.flash("success", `Your reservation has been made`);
@@ -41,75 +42,99 @@ module.exports = {
     //         })
     // },
 
-    makeReservation: (req, res, next) => {
-        if (req.skip) next();
-        
-        // let user = req.userId;
-        const user = req.currentUser;
-        User.findOne({user})
-            .then(user => {
-                // console.log('The user is:', user)
-                const {code, restaurant} = req.body
-                let newReservation = new Reservation({code, user, restaurant});
-                // let newReservation = new Reservation({ user, });
+    // makeReservation: (req, res, next) => {
+    //     if (req.skip) next();
 
-                newReservation.save()
-                .then((reservation) => {
-                        req.flash("success", `Your reservation has been made`);
-                        console.log("success", `Your reservation has been made`);
-                        console.log('The new reservation is', reservation)
+    //     // let user = req.userId;
+    //     const user = req.currentUser;
+    //     User.findOne({user})
+    //         .then(user => {
+    //             // console.log('The user is:', user)
+    //             const {code, restaurant} = req.body
+    //             let newReservation = new Reservation({code, user, restaurant});
+    //             // let newReservation = new Reservation({ user, });
 
-                        user.reservation.push(reservation)
-                        user.save()
-                        console.log('=========================== \n')
-                        // console.log(reservation)
-                        console.log('=========================== \n')
-                        console.log(user.reservation)
+    //             newReservation.save()
+    //             .then((reservation) => {
+    //                     req.flash("success", `Your reservation has been made`);
+    //                     console.log("success", `Your reservation has been made`);
+    //                     console.log('The new reservation is', reservation)
 
-                        const userById =  User.findById({_id: reservation.user});
-                        // console.log(userById.name)
-                        // userById.reservation.push(reservation);
-                        // userById.save();
+    //                     user.reservation.push(reservation)
+    //                     user.save()
+    //                     console.log('=========================== \n')
+    //                     // console.log(reservation)
+    //                     console.log('=========================== \n')
+    //                     console.log(user.reservation)
 
-                        res.locals.redirect = '/reservation';
-                        next();
-                        
-                }).catch((error)=> {
-                    console.log('Reservation failed because:', error)
-                    next(error)
-                })
-    
-                // newReservation.save(newReservation, (error, reservation) => {
-                //     if (reservation) {
-                //         req.flash("success", `Your reservation has been made`);
-                //         console.log("success", `Your reservation has been made`);
-                //         res.locals.redirect = '/reservation';
-                //         next();
-                //     }   else {
-                //         req.flash("error", `'failed to create reservation: ${error.message}.`);
-                //         // res.locals.redirect = 'users/signup';
-                //         console.log('failed to create reservation')
-                //         next()
-                //     }
-                // })
-            })
+    //                     const userById =  User.findById({_id: reservation.user});
+    //                     // console.log(userById.name)
+    //                     // userById.reservation.push(reservation);
+    //                     // userById.save();
+
+    //                     res.locals.redirect = '/reservation';
+    //                     next();
+
+    //             }).catch((error)=> {
+    //                 console.log('Reservation failed because:', error)
+    //                 next(error)
+    //             })
+
+    //             // newReservation.save(newReservation, (error, reservation) => {
+    //             //     if (reservation) {
+    //             //         req.flash("success", `Your reservation has been made`);
+    //             //         console.log("success", `Your reservation has been made`);
+    //             //         res.locals.redirect = '/reservation';
+    //             //         next();
+    //             //     }   else {
+    //             //         req.flash("error", `'failed to create reservation: ${error.message}.`);
+    //             //         // res.locals.redirect = 'users/signup';
+    //             //         console.log('failed to create reservation')
+    //             //         next()
+    //             //     }
+    //             // })
+    //         })
+    // },
+
+
+    makeReservation: async (req, res, next) => {
+        const user = await User.findOne({ user: req.currentUser })
+        console.log('The current logged in user is', user)
+
+        if (!user) { res.redirect('users/login') }
+
+        const restaurant = await Restaurant.findOne({ name: req.params.name })
+        console.log(req.params)
+        console.log('The current restaurant is', restaurant)
+        if (!restaurant) { console.log('Cant\' find restaurant to create reservation') }
+
+        const reservation = await Reservation.create({ code: req.body.code, user: user.id, restaurant: restaurant.id })
+          
+        console.log(reservation)
+        res.locals.redirect = '/';
+
+        next()
     },
+
+
+
+
 
     usersReservation: (req, res, next) => {
         Reservation.find({})
             .then(reservations => {
                 res.locals.reservations = reservations;
                 next();
-        })
+            })
             .catch(error => {
                 console.log(`Error fetching data ${error.message}`);
                 next(error);
-       })
+            })
     },
 
     usersReservationView: (req, res) => {
-       res.render('reservation/reservation')
-    }    
+        res.render('reservation/reservation')
+    }
 
 }
 

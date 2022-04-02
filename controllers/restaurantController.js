@@ -125,6 +125,7 @@ module.exports = {
 
     restaurantDetails: (req, res, next) => {
         let name = req.params.name;
+        console.log(name)
         let id = req.params.id;
         Restaurant.findOne({name})
             .then(restaurant => {

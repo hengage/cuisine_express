@@ -27,9 +27,9 @@ const mongoose =  require('mongoose'),
         //     type: String,
         //     required: true
         // },
-        reservation: [{
-            type: Schema.Types.ObjectId, ref: "Reservation"
-        }],
+        // reservation: [{
+        //     type: Schema.Types.ObjectId, ref: "Reservation"
+        // }],
         courses: [{type: Schema.Types.ObjectId, ref: "Course"}],
         subscribedAccount: {type: Schema.Types.ObjectId, ref: "Subscriber"}
         }, {

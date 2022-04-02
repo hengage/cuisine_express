@@ -11,7 +11,7 @@ router.use('/', homeRoutes)
 .use('/', authRoutes)
 .use('/users', userRoutes)
 .use('/restaurant', restaurantRoutes)
-.use('/reservation', reservationRoutes )
+// .use('/reservation', reservationRoutes )
 .use('/courses', courseRoutes)
 .use('/', errorRoutes);
 

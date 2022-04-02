@@ -4,7 +4,7 @@ const express = require('express'),
     restaurantController = require('../controllers/restaurantController');
 
 router.post(
-    '', 
+    '/:name', 
     reservationController.makeReservation, 
     reservationController.redirectView,
 )
