@@ -10,27 +10,20 @@
         <%= user.email %>
     </li><br>
 
-    <% if (user.reservation) {%>
 
-        <h3>Your reservations</h3>
+    <% userReservation.forEach(reservation=> { %>
+
         <li>
-            <%= user.reservation %>
-        </li><br>
-
-        <ul>
-            <% user.reservation.forEach(reservation=> { %>
-
-                <li>
-                    <%= reservation.code %>
-                        <%= reservation.user %>
-                            <%= reservation.restaurant %>
-                </li>
-                <% }) %>
-
-        </ul>
-        <% } else { %>
-            <p>You have no table reservation</p>
-            <% } %>
+            <p> Reservation code: <%= reservation.code %></p>
+            <p>Restaurant: <%= reservation.restaurant.name %></p>
+            <p>Restaurant address: <%= reservation.restaurant.address %></p>
+            <p>Customer name: <%= reservation.user.fullName %></p>
+            <p>Customer email: <%= reservation.user.email %></p>
+            <br>
+        </li>
+        <% }) %>
+    
+   
 </ul>
 
 

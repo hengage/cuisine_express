@@ -3,7 +3,6 @@ const router = require('express').Router(),
     authRoutes = require('./authRoutes'),
     userRoutes = require('./userRoutes'),
     restaurantRoutes = require('./restaurantRoutes'),
-    reservationRoutes= require('./reservationRoutes'),
     courseRoutes = require('./courseRoutes'),
     errorRoutes = require('./errorRoutes');
 
@@ -11,7 +10,6 @@ router.use('/', homeRoutes)
 .use('/', authRoutes)
 .use('/users', userRoutes)
 .use('/restaurant', restaurantRoutes)
-// .use('/reservation', reservationRoutes )
 .use('/courses', courseRoutes)
 .use('/', errorRoutes);
 

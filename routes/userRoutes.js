@@ -26,7 +26,8 @@ router.get('/logout', usersController.logout, usersController.redirectView)
 
 router.get(
     '/:id', 
-    usersController.userProfile, 
+    usersController.userProfile,
+    usersController.usersReservation, 
     usersController.userProfileView
 );
 

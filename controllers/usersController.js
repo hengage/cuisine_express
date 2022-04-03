@@ -1,8 +1,9 @@
 const User = require('../models/userModel');
+const Reservation = require('../models/reservationModel');
 const passport = require('passport');
-const { check, validationResult} = require("express-validator")
- 
-const  getUserParams = (body) => {
+const { check, validationResult } = require("express-validator")
+
+const getUserParams = (body) => {
     return {
         name: {
             first: body.first,
@@ -12,7 +13,7 @@ const  getUserParams = (body) => {
         email: body.email,
         password: body.password
     }
-        
+
 };
 
 module.exports = {
@@ -25,16 +26,16 @@ module.exports = {
         else next();
     },
 
-    index:  (req, res, next) => {
+    index: (req, res, next) => {
         User.find({})
-         .then(users => {
-            res.locals.users = users;
+            .then(users => {
+                res.locals.users = users;
                 next();
-         })
-         .catch(error => {
-            console.log(`Error fetching users ${error.message}`);
-            next(error);
-        });
+            })
+            .catch(error => {
+                console.log(`Error fetching users ${error.message}`);
+                next(error);
+            });
     },
 
     indexView: (req, res) => {
@@ -45,15 +46,16 @@ module.exports = {
         res.render('users/newUser')
     },
 
-    validateNewUser: (req, res, next) => {[
-        check('email', 'invalid email').not().isEmpty(),
-        check(
-            'password', 
-            'Your password must be at least 5 characters')
-                .not().isEmpty().isLength({min: 5}),
-        check('first', 'First name should not be empty').not().isEmpty(),
-        check('lasst', 'Last name should not be empty').not().isEmpty()
-    ];
+    validateNewUser: (req, res, next) => {
+        [
+            check('email', 'invalid email').not().isEmpty(),
+            check(
+                'password',
+                'Your password must be at least 5 characters')
+                .not().isEmpty().isLength({ min: 5 }),
+            check('first', 'First name should not be empty').not().isEmpty(),
+            check('lasst', 'Last name should not be empty').not().isEmpty()
+        ];
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -79,7 +81,7 @@ module.exports = {
                 req.flash("success", `${user.fullName}'s account created successfully`);
                 res.locals.redirect = '/users';
                 next();
-            }   else {
+            } else {
                 req.flash("error", `Failed to create user account because: ${error.message}.`);
                 res.locals.redirect = 'users/signup';
                 next()
@@ -96,11 +98,11 @@ module.exports = {
         successFlash: 'Logged in',
         failureRedirect: '/users/login',
         failureFlash: 'Failed to loginNNN'
-    },console.log('userrrrrr')),
+    }, console.log('userrrrrr')),
 
     userLoginRedirect: (req, res, next) => {
         let email = req.body.email
-        User.findOne({email})
+        User.findOne({ email })
             .then(user => {
                 return res.redirect(`/users/${user.id}`)
                 next()
@@ -131,6 +133,18 @@ module.exports = {
             });
     },
 
+    usersReservation: async (req, res, next) => {
+
+        const user =  req.params.id
+        console.log('The user logged in is', user)
+        const userReservation = await Reservation.find({user:user})
+            // .populate({path:user})
+            .populate('user')
+            .populate('restaurant')
+        res.locals.userReservation = userReservation
+        next()
+    },
+
     userProfileView: (req, res) => {
         res.render('users/userProfile');
     },
@@ -151,7 +165,7 @@ module.exports = {
 
     updateUserProfile: (req, res, next) => {
         let userId = req.params.id,
-        userParams = getUserParams(req.body);
+            userParams = getUserParams(req.body);
 
         User.findByIdAndUpdate(userId, {
             $set: userParams
