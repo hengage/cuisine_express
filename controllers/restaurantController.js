@@ -1,11 +1,11 @@
 "use strict";
 
-const Restaurant = require('../models/restaurantModel');
+const Restaurant = require('../models/restaurantModel'),
+    Reservation = require('../models/reservationModel');
 const passport = require('passport');
 const showError = require('../error');
-const errorController = require('../controllers/errorController')
 
-const  getRestaurantParams = (body) => {
+const getRestaurantParams = (body) => {
     return {
         name: body.name,
         email: body.email,
@@ -38,12 +38,12 @@ module.exports = {
         Restaurant.register(newRestaurant, req.body.password, (error, restaurant) => {
             if (restaurant) {
                 req.flash(
-                    "success", 
+                    "success",
                     `Your business, ${newRestaurant.name} has been successfully registered`
                 );
                 res.locals.redirect = '/';
                 next();
-            }   else {
+            } else {
                 req.flash(
                     "error",
                     `Failed to create restaurant account because: ${error.message}.`
@@ -63,11 +63,11 @@ module.exports = {
         successFlash: 'Logged in',
         failureRedirect: '/restaurant/login',
         failureFlash: 'Failed to login'
-    }), 
-        
+    }),
+
     restaurantLoginRedirect: (req, res) => {
         let email = req.body.email
-        Restaurant.findOne({email})
+        Restaurant.findOne({ email })
             .then(restaurant => {
                 return res.redirect(`/restaurant/dashboard/${restaurant.name}`)
                 next()
@@ -87,11 +87,11 @@ module.exports = {
     dashboard: (req, res, next) => {
         let name = req.params.name;
         let id = req.params.id;
-        Restaurant.findOne({name}).where('id', id)
+        Restaurant.findOne({ name }).where('id', id)
             .then(restaurant => {
-                
-                
-                if(!restaurant) {
+
+
+                if (!restaurant) {
                     return showError(res, 404)
                 }
                 res.locals.restaurant = restaurant;
@@ -103,16 +103,32 @@ module.exports = {
             })
     },
 
+    showRestaurantReservations: async (req, res, next) => {
+        let restaurantName = await req.params.name;
+        console.log('The restaurant found is:', restaurantName)
+        try {
+            var restaurantsReservations = await Reservation.find({restaurantName})
+                .populate('restaurant' )
+                .populate({path:'user'})
+            // console.log('The restaurant reservations found are', restaurantsReservations)
+        } catch (error) {
+            console.log('You have an error', error)
+        }
+        res.locals.restaurantsReservations = restaurantsReservations
+
+        next()
+    },
+
     getAllRestaurants: (req, res, next) => {
         Restaurant.find({})
-         .then(restaurants => {
-            res.locals.restaurants = restaurants;
+            .then(restaurants => {
+                res.locals.restaurants = restaurants;
                 next();
-         })
-         .catch(error => {
-            console.log(`Error fetching restaurant ${error.message}`);
-            next(error);
-        });
+            })
+            .catch(error => {
+                console.log(`Error fetching restaurant ${error.message}`);
+                next(error);
+            });
     },
 
     getAllRestaurantsView: (req, res) => {
@@ -127,7 +143,7 @@ module.exports = {
         let name = req.params.name;
         console.log(name)
         let id = req.params.id;
-        Restaurant.findOne({name})
+        Restaurant.findOne({ name })
             .then(restaurant => {
                 res.locals.restaurant = restaurant;
                 next();

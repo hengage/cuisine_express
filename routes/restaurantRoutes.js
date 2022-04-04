@@ -21,7 +21,8 @@ router.get('/login', restaurantController.login)
 // router.get('/dashboard/:id', restaurantController.dashboardView, restaurantController.dashboard);
 router.get(
     '/dashboard/:name',
-    restaurantController.dashboard, 
+    restaurantController.showRestaurantReservations,
+    restaurantController.dashboard,
     restaurantController.dashboardView,
 );
 

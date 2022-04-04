@@ -137,7 +137,7 @@ module.exports = {
 
         const user =  req.params.id
         console.log('The user logged in is', user)
-        const userReservation = await Reservation.find({user:user})
+        const userReservation = await Reservation.find({user})
             // .populate({path:user})
             .populate('user')
             .populate('restaurant')
