@@ -31,7 +31,7 @@ Sentry.init({
 expressRouter.use(cookieParser('secret_passcode'));
 expressRouter.use(expressSession({
     secret: 'secret_passcode',
-    cookie: {maxAge:50000},
+    cookie: {maxAge:5500000000},
     resave: false,
     saveUninitialized: false
 }));
