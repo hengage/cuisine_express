@@ -19,6 +19,7 @@ module.exports = {
     
     makeReservation: async (req, res, next) => {
         const currentUser = req.user;
+        console.log(currentUser)
 
         if (!currentUser) { 
             req.flash('error', 'Please login to make a reservation')
@@ -35,7 +36,8 @@ module.exports = {
             restaurant: restaurant.id 
         })
           
-        res.locals.redirect = '/';
+        req.flash('success', 'Your reservation has been made')
+        res.locals.redirect = `/users/${currentUser.id}`;
 
         next()
     },
