@@ -1,6 +1,5 @@
 "use strict";
 const Subscriber = require('./subscriberModel');
-const bcrypt  = require('bcrypt');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const mongoose =  require('mongoose'),
