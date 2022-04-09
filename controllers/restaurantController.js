@@ -59,7 +59,6 @@ module.exports = {
     },
 
     authenticate: passport.authenticate('restaurantLocal', {
-        // successRedirect: `/` ,
         successFlash: 'Logged in',
         failureRedirect: '/restaurant/login',
         failureFlash: 'Failed to login'
@@ -76,7 +75,6 @@ module.exports = {
                 console.log(`Error fetching restaurant by ID: ${error.message}`)
                 next(error);
             });
-        // res.redirect(`/restaurant/dashboard/${req.body.email}`)
     },
 
     dashboardView: (req, res, next) => {
@@ -110,9 +108,8 @@ module.exports = {
             var restaurantsReservations = await Reservation.find({restaurantName})
                 .populate('restaurant' )
                 .populate({path:'user'})
-            // console.log('The restaurant reservations found are', restaurantsReservations)
         } catch (error) {
-            console.log('You have an error', error)
+            console.log('You have an error:', error)
         }
         res.locals.restaurantsReservations = restaurantsReservations
 

@@ -1,13 +1,19 @@
 const express = require('express'),
-    router  = express.Router(),
+    router = express.Router(),
     usersController = require('../controllers/usersController');
 
-    
-router.get('/', usersController.index, usersController.indexView);
 
-router.get('/signup', usersController.newUser);
+router.get(
+    '/', usersController.index, 
+    usersController.indexView
+);
+
+router.get(
+    '/signup', 
+    usersController.newUser
+);
 router.post(
-    '/create', 
+    '/create',
     usersController.validateNewUser,
     usersController.create,
     usersController.redirectView
@@ -16,34 +22,40 @@ router.post(
 router.get('/login', usersController.login);
 
 router.post(
-    '/login', 
-    usersController.authenticate, 
+    '/login',
+    usersController.authenticate,
     usersController.userLoginRedirect,
     // usersController.redirectView,
 );
 
-router.get('/logout', usersController.logout, usersController.redirectView)
+router.get(
+    '/logout', 
+    usersController.logout, 
+    usersController.redirectView
+)
 
 router.get(
-    '/:id', 
+    '/:id',
     usersController.userProfile,
-    usersController.usersReservation, 
+    usersController.usersReservation,
     usersController.userProfileView
 );
 
-router.get('/:id/edit', usersController.editUserProfile);
+router.get(
+    '/:id/edit',
+    usersController.editUserProfile
+);
 router.put(
-    '/:id/update', 
-    usersController.updateUserProfile, 
+    '/:id/update',
+    usersController.updateUserProfile,
     usersController.redirectView
 );
 
 router.delete(
-    '/:id/delete', 
-    usersController.deleteUSer, 
+    '/:id/delete',
+    usersController.deleteUSer,
     usersController.redirectView
 );
 
 module.exports = router;
 
-// module.exports = app;
