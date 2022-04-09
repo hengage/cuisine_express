@@ -17,15 +17,6 @@ const getRestaurantParams = (body) => {
 
 
 module.exports = {
-    redirectView: (req, res, next) => {
-        // Function for redirection to another page 
-        // after a successful crud operation
-
-        let redirectPath = res.locals.redirect;
-        if (redirectPath) res.redirect(redirectPath);
-        else next();
-    },
-
     newRestaurant: (req, res) => {
         res.render('restaurant/newRestaurant')
     },

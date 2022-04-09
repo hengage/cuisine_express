@@ -1,7 +1,8 @@
 const express = require('express'),
     router = express.Router(),
-    restaurantController = require('../controllers/restaurantController');
-reservationController = require('../controllers/reservationController');
+    restaurantController = require('../controllers/restaurantController'),
+    reservationController = require('../controllers/reservationController'),
+    redirectView = require('../controllers/utils');
 
 
 router.get(
@@ -18,7 +19,7 @@ router.get(
 router.post(
     '/create-business', 
     restaurantController.create, 
-    restaurantController.redirectView
+    redirectView
 )
 
 router.get(
@@ -27,7 +28,7 @@ router.get(
 ).post(
         '/login',
         restaurantController.authenticate,
-        restaurantController.redirectView,
+        redirectView,
         restaurantController.restaurantLoginRedirect
 )
 
@@ -49,7 +50,7 @@ router
 router.post(
     '/:name', 
     reservationController.makeReservation, 
-    reservationController.redirectView
+    redirectView
 )
 
 

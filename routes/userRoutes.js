@@ -1,6 +1,7 @@
 const express = require('express'),
     router = express.Router(),
-    usersController = require('../controllers/usersController');
+    usersController = require('../controllers/usersController'),
+    redirectView = require('../controllers/utils');;
 
 
 router.get(
@@ -16,7 +17,7 @@ router.post(
     '/create',
     usersController.validateNewUser,
     usersController.create,
-    usersController.redirectView
+    redirectView
 );
 
 router.get('/login', usersController.login);
@@ -31,7 +32,7 @@ router.post(
 router.get(
     '/logout', 
     usersController.logout, 
-    usersController.redirectView
+    redirectView
 )
 
 router.get(
@@ -48,13 +49,13 @@ router.get(
 router.put(
     '/:id/update',
     usersController.updateUserProfile,
-    usersController.redirectView
+    redirectView
 );
 
 router.delete(
     '/:id/delete',
     usersController.deleteUSer,
-    usersController.redirectView
+    redirectView
 );
 
 module.exports = router;
