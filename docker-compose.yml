@@ -1,18 +1,21 @@
 version: "3"
 services:
-  web:
-    image: hengage/cuisine_express
-    env_file: .env
-    ports:
-      - "8080:3000"
-    environment:
-      NODE_ENV: development
   mongodb:
     image: mongo:4.1.1
     ports:
       - 27017:27017
     volumes:
-      - ~/apps/mongo:/data/db
+      - ~/C:\data\db
+  web:
+    restart: always
+    build: .
+    env_file: .env
+    ports:
+      - "8080:3000"
+    external_links:
+      - mongo
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=hengage
-      - MONGO_INITDB_ROOT_PASSWORD=yungkidatune
+      NODE_ENV: development
+    depends_on: 
+      - mongo
+    
