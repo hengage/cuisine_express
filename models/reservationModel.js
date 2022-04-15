@@ -9,10 +9,11 @@ const mongoose = require('mongoose'),
         code: {
             type: String,
             default: randomstring.generate({
-                length: 12,
+                length: 6,
                 charset: 'alphanumeric',
-                unique: true
-            })
+                capitalization: 'lowercase'
+            }),
+            // unique: true
         },
 
         reservationDateTime: {
