@@ -26,7 +26,7 @@ router.post(
     '/login',
     usersController.authenticate,
     usersController.userLoginRedirect,
-    // usersController.redirectView,
+    // redirectView,
 );
 
 router.get(
