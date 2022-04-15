@@ -32,6 +32,7 @@ module.exports = {
 
         const reservation = await Reservation.create({ 
             code: req.body.code,
+            reservationDateTime: req.body.reservationDateTime,
             user: currentUser.id,
             restaurant: restaurant.id 
         })

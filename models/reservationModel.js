@@ -9,13 +9,19 @@ const mongoose = require('mongoose'),
         code: {
             type: String,
             default: randomstring.generate({
-            length: 12,
-            charset: 'alphanumeric',
-            unique: true
-          })},
+                length: 12,
+                charset: 'alphanumeric',
+                unique: true
+            })
+        },
+
+        reservationDateTime: {
+            type: Date,
+            required: true
+        },
 
         user: {
-            type : mongoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
 
@@ -23,12 +29,12 @@ const mongoose = require('mongoose'),
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Restaurant'
         }
-        }, {
-            timestamps: true
+    }, {
+        timestamps: true
     });
 
 
-    module.exports = mongoose.model(
-        'Reservation',
-        reservationSchema
-    )
+module.exports = mongoose.model(
+    'Reservation',
+    reservationSchema
+)
