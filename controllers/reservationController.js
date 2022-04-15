@@ -19,7 +19,7 @@ module.exports = {
     
     makeReservation: async (req, res, next) => {
         const currentUser = req.user;
-        console.log(currentUser)
+        // console.log(currentUser)
 
         if (!currentUser) { 
             req.flash('error', 'Please login to make a reservation')
@@ -27,11 +27,11 @@ module.exports = {
         }
 
         const restaurant = await Restaurant.findOne({ name: req.params.name })
-        console.log(req.params)
         if (!restaurant) { console.log('Cant\' find restaurant to create reservation') }
 
+        
+
         const reservation = await Reservation.create({ 
-            code: req.body.code,
             reservationDateTime: req.body.reservationDateTime,
             user: currentUser.id,
             restaurant: restaurant.id 
