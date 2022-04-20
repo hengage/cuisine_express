@@ -185,7 +185,8 @@ app.set('view engine', 'ejs')
 .use(layouts);
 
 // STATIC FILES
-app.use('/public', express.static('public'));
+// app.use('/public', express.static('public'));
+app.use(express.static('public'));
 
 
 // BODY PARSING
