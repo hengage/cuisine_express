@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  background: white;
+  margin: 0;
+  padding: 0 .7em;
+}
+
+header .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+header .container .nav-menu {
+  display: block;
+}
+
+header h3 {
+  font-size: 1.6em;
+}
+
+header h3 span {
+  color: #20272e;
+}
+
+header nav {
+  display: none;
+  background: #20272e;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 70vh;
+}
+
+header .menu-tray {
+  cursor: pointer;
+  display: inline-block;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin-top: 1.5em;
+}
+
+header .bar1, header .bar2, header .bar3 {
+  width: 39px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+header .change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+          transform: rotate(-45deg) translate(-9px, 6px);
+  background-color: white;
+  position: fixed;
+  z-index: 999;
+}
+
+header .change .bar2 {
+  opacity: 0;
+}
+
+header .change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+          transform: rotate(45deg) translate(-8px, -8px);
+  background-color: white;
+  position: fixed;
+  z-index: 999;
+}
+
+header ul {
+  margin-top: 6em;
+}
+
+header li a {
+  padding: .8em 1em;
+  color: white;
+  font-size: 1.4em;
+  display: block;
+  text-align: right;
+}
+/*# sourceMappingURL=app.css.map */
