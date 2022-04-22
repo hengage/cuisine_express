@@ -28,6 +28,12 @@ header .container {
           align-items: flex-start;
 }
 
+@media only screen and (min-width: 600px) {
+  header .container {
+    place-content: space-between;
+  }
+}
+
 header .container .nav-menu {
   display: block;
 }
@@ -50,6 +56,17 @@ header nav {
   height: 70vh;
 }
 
+@media only screen and (min-width: 600px) {
+  header nav {
+    display: block;
+    background: none;
+    width: 60%;
+    height: -webkit-min-content;
+    height: -moz-min-content;
+    height: min-content;
+  }
+}
+
 header .menu-tray {
   cursor: pointer;
   display: inline-block;
@@ -57,6 +74,12 @@ header .menu-tray {
   width: -moz-max-content;
   width: max-content;
   margin-top: 1.5em;
+}
+
+@media only screen and (min-width: 600px) {
+  header .menu-tray {
+    display: none;
+  }
 }
 
 header .bar1, header .bar2, header .bar3 {
@@ -92,11 +115,32 @@ header ul {
   margin-top: 6em;
 }
 
+@media only screen and (min-width: 600px) {
+  header ul {
+    margin-top: 1.9em;
+    text-align: right;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  header li {
+    display: inline;
+  }
+}
+
 header li a {
   padding: .8em 1em;
   color: white;
   font-size: 1.4em;
   display: block;
   text-align: right;
+}
+
+@media only screen and (min-width: 600px) {
+  header li a {
+    color: #000;
+    display: inline;
+    text-align: right;
+  }
 }
 /*# sourceMappingURL=app.css.map */
