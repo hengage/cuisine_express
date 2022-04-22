@@ -133,6 +133,9 @@ module.exports = {
         let id = req.params.id;
         Restaurant.findOne({ name })
             .then(restaurant => {
+                if (!restaurant) {
+                    return showError(res, 404)
+                }
                 res.locals.restaurant = restaurant;
                 next();
             })
