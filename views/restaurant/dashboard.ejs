@@ -7,16 +7,17 @@
 <h3>Reservations</h3>
 
 
-
+<ul>
 <% restaurantsReservations.forEach(reservation=> { %>
-
-    <li>
-        <p> Reservation code: <%= reservation.code %></p>
-        <p>Restaurant: <%= reservation.restaurant.name %></p>
-        <p>Date: <%= reservation.reservationDateTime %></p>
-        <p>Restaurant address: <%= reservation.restaurant.address %></p>
-        <p>Customer name: <%= reservation.user.fullName %></p>
-        <p>Customer email: <%= reservation.user.email %></p>
-        <br>
-    </li>
-    <% }) %>
+        <li>
+            <p> Reservation code: <%= reservation.code %></p>
+            <p>Restaurant: <%= reservation.restaurant.name %></p>
+            <p>Date: <%= reservation.reservationDateTime %></p>
+            <p>Restaurant address: <%= reservation.restaurant.address %></p>
+            <p>Customer name: <%= reservation.user.fullName %></p>
+            <p>Customer email: <%= reservation.user.email %></p>
+            <br>
+        </li
+    
+<% }) %>
+</ul>
