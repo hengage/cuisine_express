@@ -122,9 +122,21 @@ header ul {
   }
 }
 
+header li {
+  margin-right: 1.3em;
+}
+
 @media only screen and (min-width: 600px) {
   header li {
     display: inline;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  header li .pry-cta {
+    background-color: blue;
+    color: white;
+    border-radius: 30px;
   }
 }
 
@@ -141,6 +153,7 @@ header li a {
     color: #000;
     display: inline;
     text-align: right;
+    padding: .6em .6em;
   }
 }
 /*# sourceMappingURL=layout.css.map */

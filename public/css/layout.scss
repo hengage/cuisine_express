@@ -1,3 +1,5 @@
+@import "core/variables";
+
 body {
     margin: 0;
 }
@@ -113,11 +115,21 @@ header {
     }
 
     li {
+        margin-right: 1.3em;
+
 
         @media only screen and (min-width: 600px){
             // background-color: rgb(21, 87, 8);
             display: inline;
         } 
+
+        .pry-cta {
+            @media only screen and (min-width: 600px){
+                background-color: $primary-color;
+                color: white;
+                border-radius: 30px;
+            } 
+        }
 
         a {
             padding: .8em 1em;
@@ -132,6 +144,7 @@ header {
                 color: #000;
                 display: inline;
                 text-align: right;
+                padding: .6em .6em;
                 // padding: 0;
             } 
         }
