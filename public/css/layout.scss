@@ -38,12 +38,19 @@ header {
     }
 
     h3 {
-        font-size: 1.6em;
+        font-size: 1.8em;
         // background-color: blue;
+        margin-top: .7em;
 
         span{
             color: #20272e;
         }
+
+        @media only screen and (min-width: 600px){
+            font-size: 2em;
+            letter-spacing: .1rem;
+            margin-top: .6em;
+        } 
     }
 
     nav {
@@ -60,7 +67,6 @@ header {
             // background-color: rgb(21, 8, 8);
             display: block;
             background: none;
-            // position: absolute;
             width: 60%;
             height: min-content;;
         } 
@@ -145,6 +151,7 @@ header {
                 display: inline;
                 text-align: right;
                 padding: .6em .6em;
+                font-size: 1.2em;
                 // padding: 0;
             } 
         }

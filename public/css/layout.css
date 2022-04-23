@@ -39,11 +39,20 @@ header .container .nav-menu {
 }
 
 header h3 {
-  font-size: 1.6em;
+  font-size: 1.8em;
+  margin-top: .7em;
 }
 
 header h3 span {
   color: #20272e;
+}
+
+@media only screen and (min-width: 600px) {
+  header h3 {
+    font-size: 2em;
+    letter-spacing: .1rem;
+    margin-top: .6em;
+  }
 }
 
 header nav {
@@ -154,6 +163,7 @@ header li a {
     display: inline;
     text-align: right;
     padding: .6em .6em;
+    font-size: 1.2em;
   }
 }
 /*# sourceMappingURL=layout.css.map */
