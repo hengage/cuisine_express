@@ -2,24 +2,16 @@
 
 const Reservation = require('../models/reservationModel');
 const Restaurant = require('../models/restaurantModel');
-const User = require('../models/userModel')
+const User = require('../models/userModel'),
+nodemailer = require('nodemailer');
+const makeReservationConfirmEmail = require('../emailSender')
 
 
 module.exports = {
-
-    redirectView: (req, res, next) => {
-        // Function for redirection to another page 
-        // after a successful crud operation
-
-        let redirectPath = res.locals.redirect;
-        if (redirectPath) res.redirect(redirectPath);
-        else next();
-    },
-
     
     makeReservation: async (req, res, next) => {
         const currentUser = req.user;
-        // console.log(currentUser)
+        // console.log(currentUser.email)
 
         if (!currentUser) { 
             req.flash('error', 'Please login to make a reservation')
@@ -29,8 +21,6 @@ module.exports = {
         const restaurant = await Restaurant.findOne({ name: req.params.name })
         if (!restaurant) { console.log('Cant\' find restaurant to create reservation') }
 
-        
-
         const reservation = await Reservation.create({ 
             reservationDateTime: req.body.reservationDateTime,
             user: currentUser.id,
@@ -38,6 +28,7 @@ module.exports = {
         })
           
         req.flash('success', 'Your reservation has been made')
+        makeReservationConfirmEmail(currentUser, req.body.reservationDateTime)
         res.locals.redirect = `/users/${currentUser.id}`;
 
         next()
@@ -55,6 +46,7 @@ module.exports = {
                 next(error);
             })
     },
+
 
     usersReservationView: (req, res) => {
         res.render('reservation/reservation')
