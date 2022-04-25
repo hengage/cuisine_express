@@ -55,34 +55,6 @@ const User = require('./models/userModel'),
 passport.use('restaurantLocal',Restaurant.createStrategy())
 passport.use('userLocal',User.createStrategy())
 
-// passport.use('userLocal', new LocalStrategy(User.authenticate()));
-// passport.use('restaurantLocal', new LocalStrategy(Restaurant.authenticate()));
-
-// passport.use('userLocal', new LocalStrategy(
-//     function(email, password, done) {
-//         User.findOne({ email: email}, function (err, user) {
-//             if(err) throw err;
-//             if(!user){
-//               return done(null, false, {
-//                   message: `No user found`
-//                 });
-//             };
-//         });
-//     }
-// ));
-
-
-// passport.use('restaurantLocal', new LocalStrategy(
-//     function(email, password, done) {
-//         User.findOne({ email: email}, function (err, user) {
-//             if(err) throw err;
-//             if(!user){
-//               return done(null, false, {message: 'No user found'});
-//             };
-//         });
-//     }
-// ));
-
 
 function SessionConstructor(userId, userGroup, details) {
     this.userId = userId;
@@ -139,9 +111,6 @@ const router = require('./routes/index');
 
 app.use('/', expressRouter);
 
-// DATABASE CONNECTION
-// const mongoose = require('mongoose');
-// mongoose.Promise = global.Promise;
 
 let dbURL = process.env.DATABASE_URL
 mongoose.connect(dbURL, {
@@ -185,7 +154,6 @@ app.set('view engine', 'ejs')
 .use(layouts);
 
 // STATIC FILES
-// app.use('/public', express.static('public'));
 app.use(express.static('public'));
 
 
@@ -196,10 +164,6 @@ app.use(express.urlencoded({extended:false}))
 
 // Use router 
 app.use('/', router);
-
-
-// Forms validation.
-// router.use(expressValidator());
 
 
 app.listen(app.get("port"), () => {
