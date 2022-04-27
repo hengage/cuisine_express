@@ -1,0 +1,35 @@
+// @import "../abstract/variables";
+
+
+    
+.create-reservation {
+    background: #455070;
+    padding: 1em;
+    margin: 0 1em;
+    border-bottom-right-radius: 7%;
+    text-align: center;
+
+    input[type=datetime-local] {
+        // background: red;
+        width: 100%;
+        border: none;
+        border-radius: 3%;
+        padding: 1em;
+        margin-bottom: .8em;
+    }
+
+    button {
+        display: block;
+        background-color: #04AA6D;
+        color: white;
+        font-size: 1.2em;
+        font-weight: lighter;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 3%;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:10px;
+        // opacity: 0.8;
+    }
+}

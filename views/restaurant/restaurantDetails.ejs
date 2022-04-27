@@ -1,16 +1,22 @@
-<%= restaurant.name %>
-<%= restaurant.address %>
-<%= restaurant.zipCode %>
+<section class="restaurant-detail">
+  <div class="container">
+    <%= restaurant.name %> <%= restaurant.address %> <%= restaurant.zipCode %>
 
+    <form class="create-reservation" method="post">
+      <h2>Make a table reservation</h2>
 
-
-<form  method="post">
-    <h2>
-        Make a reservation
-    </h2>
-
-    <label for="reservationDateTime">Select date and time </label>
-    <input type="datetime-local" id="reservationDateTime" name="reservationDateTime" required>
-    <button type="submit">Create reservation</button>
-</form>
-    
+      <!-- <label for="reservationDateTime">Select date and time </label> -->
+      <h4>
+        Select a date and time for your dining and proceed to book a table
+      </h4>
+      <input
+        type="datetime-local"
+        id="reservationDateTime"
+        name="reservationDateTime"
+        value="ee"
+        required
+      />
+      <button type="submit">Create reservation</button>
+    </form>
+  </div>
+</section>
