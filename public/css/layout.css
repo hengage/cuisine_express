@@ -28,14 +28,10 @@ header .container {
           align-items: flex-start;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 1024px) {
   header .container {
     place-content: space-between;
   }
-}
-
-header .container .nav-menu {
-  display: block;
 }
 
 header h3 {
@@ -47,7 +43,7 @@ header h3 span {
   color: #20272e;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 669px) {
   header h3 {
     font-size: 2em;
     letter-spacing: .1rem;
@@ -65,7 +61,7 @@ header nav {
   height: 70vh;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 669px) {
   header nav {
     display: block;
     background: none;
@@ -74,6 +70,10 @@ header nav {
     height: -moz-min-content;
     height: min-content;
   }
+}
+
+header .nav-menu {
+  display: block;
 }
 
 header .menu-tray {
@@ -124,7 +124,7 @@ header ul {
   margin-top: 6em;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 669px) {
   header ul {
     margin-top: 1.9em;
     text-align: right;
@@ -141,7 +141,7 @@ header li {
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 669px) {
   header li .pry-cta {
     background-color: blue;
     color: white;
@@ -157,7 +157,7 @@ header li a {
   text-align: right;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 669px) {
   header li a {
     color: #000;
     display: inline;

@@ -1,4 +1,5 @@
 @import "abstract/variables";
+@import "abstract/mixins";
 
 body {
     margin: 0;
@@ -21,19 +22,9 @@ header {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        // place-content: space-between;
-        // background: olivedrab;
 
-        @media only screen and (min-width: 600px){
-            // background-color: rgb(21, 8, 8);
-            // display: block;
-            // background-color: aqua;
+        @include for_breakpoint(desktop) {
             place-content: space-between;
-        } 
-            
-
-        .nav-menu {
-            display: block;
         }
     }
 
@@ -46,11 +37,11 @@ header {
             color: #20272e;
         }
 
-        @media only screen and (min-width: 600px){
+        @include for_breakpoint(medium) {
             font-size: 2em;
             letter-spacing: .1rem;
             margin-top: .6em;
-        } 
+        }
     }
 
     nav {
@@ -63,13 +54,17 @@ header {
         width: 100%;
         height: 70vh;
 
-        @media only screen and (min-width: 600px){
-            // background-color: rgb(21, 8, 8);
+
+        @include for_breakpoint(medium) {
             display: block;
             background: none;
             width: 60%;
             height: min-content;;
-        } 
+        }
+    }
+
+    .nav-menu {
+            display: block;
     }
 
     .menu-tray {
@@ -113,11 +108,10 @@ header {
         margin-top: 6em;
         // background-color: paleturquoise;
 
-        @media only screen and (min-width: 600px){
-            // background-color: rgb(86, 97, 162);
-            margin-top: 1.9em;
-            text-align: right;
-        } 
+        @include for_breakpoint(medium) {
+                margin-top: 1.9em;
+                text-align: right;
+        }
     }
 
     li {
@@ -130,11 +124,11 @@ header {
         } 
 
         .pry-cta {
-            @media only screen and (min-width: 600px){
+            @include for_breakpoint(medium) {
                 background-color: $primary-color;
                 color: white;
                 border-radius: 30px;
-            } 
+            }
         }
 
         a {
@@ -144,16 +138,15 @@ header {
             font-size: 1.4em;
             display: block;
             text-align: right;
-
-            @media only screen and (min-width: 600px){
-                // background-color: rgb(21, 8, 8);
+        
+            @include for_breakpoint(medium) {
                 color: #000;
                 display: inline;
                 text-align: right;
                 padding: .6em .6em;
                 font-size: 1.2em;
-                // padding: 0;
-            } 
+            }
+            
         }
     }
 }
