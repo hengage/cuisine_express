@@ -172,6 +172,19 @@ header li a {
   }
 }
 
+.button-basic, .create-reservation button {
+  background-color: #04AA6D;
+  color: white;
+  font-size: 1.2em;
+  font-weight: lighter;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 3%;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .create-reservation {
   background: #455070;
   padding: 1em;
@@ -190,6 +203,9 @@ header li a {
 
 .create-reservation button {
   display: block;
+}
+
+.button-basic, .create-reservation button {
   background-color: #04AA6D;
   color: white;
   font-size: 1.2em;
