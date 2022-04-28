@@ -1,8 +1,9 @@
 const router = require('express').Router(),
-    homeController = require('../controllers/homeController');
+    homeController = require('../controllers/homeController'),
+    restaurantController = require('../controllers/restaurantController');
 
 
- router.get('/', homeController.homePageController);
+ router.get('/', restaurantController.getAllRestaurants, homeController.homePageController);
 
  
  module.exports = router;
