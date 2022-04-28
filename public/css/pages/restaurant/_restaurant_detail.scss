@@ -9,6 +9,12 @@
     border-bottom-right-radius: 7%;
     text-align: center;
 
+    h2, p {
+        color: $secondary-text-color;
+        letter-spacing: .022em;
+    }
+
+
     input[type=datetime-local] {
         // background: red;
         width: 100%;

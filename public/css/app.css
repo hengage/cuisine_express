@@ -6,7 +6,7 @@
 body {
   margin: 0;
   background-color: #f2f2f2;
-  color: black;
+  color: #444;
   font-family: 'Alef', sans-serif;
 }
 
@@ -194,6 +194,11 @@ header li a {
   margin: 0 1em;
   border-bottom-right-radius: 7%;
   text-align: center;
+}
+
+.create-reservation h2, .create-reservation p {
+  color: white;
+  letter-spacing: .022em;
 }
 
 .create-reservation input[type=datetime-local] {
