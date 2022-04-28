@@ -119,9 +119,6 @@ module.exports = {
             });
     },
 
-    getAllRestaurantsView: (req, res) => {
-        res.render('restaurant/allRestaurants');
-    },
 
     restaurantDetailsView: (req, res) => {
         res.render('restaurant/restaurantDetails');

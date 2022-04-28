@@ -6,12 +6,6 @@ const express = require('express'),
 
 
 router.get(
-    '/all', 
-    restaurantController.getAllRestaurants, 
-    restaurantController.getAllRestaurantsView
-)
-
-router.get(
     '/register', 
     restaurantController.newRestaurant
 );
