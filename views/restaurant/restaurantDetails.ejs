@@ -1,6 +1,10 @@
 <section class="restaurant-detail">
   <div class="container">
-    <%= restaurant.name %> <%= restaurant.address %> <%= restaurant.zipCode %>
+    <div class="restaurant-info">
+      <h2><%= restaurant.name.toUpperCase() %></h2>
+      <p><%= restaurant.address %></p>
+      <p><%= restaurant.zipCode %></p>
+    </div>
 
     <form class="create-reservation" method="post">
       <h2>Make a table reservation</h2>

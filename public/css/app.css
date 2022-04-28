@@ -188,6 +188,23 @@ header li a {
   margin-bottom: 10px;
 }
 
+.restaurant-detail {
+  margin-top: 1em;
+  padding: 1em;
+}
+
+.restaurant-info {
+  margin: 0 1em 3em 1em;
+}
+
+.restaurant-info h2, .restaurant-info p {
+  line-height: 0.2em;
+}
+
+.restaurant-info h2 {
+  font-size: 1.8em;
+}
+
 .create-reservation {
   background: #455070;
   padding: 1em;

@@ -1,6 +1,21 @@
 @import "../../components/all";
 
+.restaurant-detail {
+    margin-top: 1em;
+    padding: 1em;
+}
 
+.restaurant-info {
+    margin: 0 1em 3em 1em;
+
+    h2, p {
+        line-height: 0.2em;
+    }
+
+    h2{
+        font-size: 1.8em;
+    }
+}
     
 .create-reservation {
     background: #455070;
