@@ -204,6 +204,41 @@ header li a {
   font-size: 1.4em;
 }
 
+.home {
+  padding: 1em;
+}
+
+.home ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.home .card {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #455070;
+  padding: 1em;
+  border-radius: 1em;
+  -webkit-box-flex: 100%;
+      -ms-flex: 100%;
+          flex: 100%;
+  margin: 0 0 1.5em -2.5em;
+}
+
+.home .card a {
+  color: white;
+}
+
+.home .card p:nth-child(1) {
+  font-size: 1.3em;
+  letter-spacing: .12em;
+}
+
 .restaurant-detail {
   margin-top: 1em;
   padding: 1em;
@@ -246,38 +281,17 @@ header li a {
   display: block;
 }
 
-.home {
+.user-profile {
   padding: 1em;
 }
 
-.home ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.card {
+.user-profile .card {
   -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: #455070;
   padding: 1em;
   border-radius: 1em;
-  -webkit-box-flex: 100%;
-      -ms-flex: 100%;
-          flex: 100%;
-  margin: 0 0 1.5em -2.5em;
-}
-
-.card a {
   color: white;
-}
-
-.card p:nth-child(1) {
-  font-size: 1.3em;
-  letter-spacing: .12em;
+  margin: 0 0 1.5em -2.5em;
 }
 /*# sourceMappingURL=app.css.map */

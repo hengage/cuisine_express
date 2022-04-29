@@ -1,40 +1,32 @@
-<h2>
-    <%= user.fullName %>
-</h2>
+<section class="user-profile">
+  <h2><%= user.fullName %></h2>
+  <p><%= user.email %></p>
 
-<ul>
-    <li>
-        <%= user.fullName %>
-    </li><br>
-    <li>
-        <%= user.email %>
-    </li><br>
+  <a href="<%= `/users/${user.id}/edit` %>">Edit Profile</a>
 
-
+  <ul>
     <% userReservation.forEach(reservation=> { %>
+    <div class="card">
+      <li>
+        <p>Reservation code: <%= reservation.code %></p>
+        <p>Restaurant: <%= reservation.restaurant.name %></p>
+        <p>Date: <%= reservation.reservationDateTime %></p>
+        <p>Restaurant address: <%= reservation.restaurant.address %></p>
+        <p>Customer name: <%= reservation.user.fullName %></p>
+        <p>Customer email: <%= reservation.user.email %></p>
+        <br />
+      </li>
+    </div>
+    <% }) %>
+  </ul>
 
-        <li>
-            <p> Reservation code: <%= reservation.code %></p>
-            <p>Restaurant: <%= reservation.restaurant.name %></p>
-            <p>Date: <%= reservation.reservationDateTime %></p>
-            <p>Restaurant address: <%= reservation.restaurant.address %></p>
-            <p>Customer name: <%= reservation.user.fullName %></p>
-            <p>Customer email: <%= reservation.user.email %></p>
-            <br>
-        </li>
-        <% }) %>
-    
-   
-</ul>
+  <button
+    onclick="return confirm('Are you sure you want to delete your account?') "
+  >
+    <a href="<%= `/users/${user.id}/delete?_method=DELETE` %>"
+      >Delete account</a
+    >
+  </button>
 
-
-
-
-
-<a href="<%= `/users/${user.id}/edit` %>">Edit Profile</a> <br><br>
-
-<button onclick="return confirm('Are you sure you want to delete your account?') ">
-    <a href="<%= `/users/${user.id}/delete?_method=DELETE` %>">Delete account</a>
-</button>
-
-<a href="<%= `/users` %>">All users</a>
+  <a href="<%= `/users` %>">All users</a>
+</section>

@@ -1,0 +1,11 @@
+.user-profile {
+    padding: 1em;
+
+    .card {
+    @include cards;
+    color: $secondary-text-color;
+    margin: 0 0 1.5em -2.5em;
+
+    }
+
+}
