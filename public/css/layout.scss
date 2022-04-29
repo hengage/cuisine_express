@@ -160,11 +160,11 @@ header {
     // background-color: #000;
 
     .success-message {
-        color: rgb(22, 236, 22);
+        color: $success-message-color;
     }
 
     .error-message {
-        color: #ff0000;
+        color: $error-message-color;
     }
 
     .error-message, .success-message{
