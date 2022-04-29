@@ -8,12 +8,9 @@
 }
 
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: $secondary-background-color;
+    @include cards;
     flex: 100%;
     margin: 0 0 1.5em -2.5em;
-    padding: 1em;
-    border-radius: 1em;
 
     a {
         color: $secondary-text-color;
