@@ -230,6 +230,29 @@ header li a {
   display: block;
 }
 
+.home {
+  padding: 1em;
+}
+
+.home ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.card {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-box-flex: 100%;
+      -ms-flex: 100%;
+          flex: 100%;
+  margin: 0 0 1.5em -2.5em;
+}
+
 .button-basic, .create-reservation button {
   background-color: #04AA6D;
   color: white;

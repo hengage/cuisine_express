@@ -1,0 +1,15 @@
+.home {
+    padding: 1em;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    // background-color: rgb(191, 166, 166);
+    flex: 100%;
+    margin: 0 0 1.5em -2.5em;
+}

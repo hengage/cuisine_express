@@ -1,14 +1,17 @@
-<ul>
-  <% restaurants.forEach(restaurant => { %>
-  <li>
-    <p>
-      <a href="<%= `/restaurant/${restaurant.name}` %>"
-        ><%= restaurant.name %></a
-      >
-    </p>
-    <p><%= restaurant.email %></p>
-    <p><%= restaurant.id %></p>
-    <p><%= restaurant.password %></p>
-  </li>
-  <% }) %>
-</ul>
+<section class="home">
+  <div class="container">
+    <ul>
+      <% restaurants.forEach(restaurant => { %>
+      <div class="card">
+        <a href="<%= `/restaurant/${restaurant.name}` %>">
+          <li>
+            <p><%= restaurant.name.toUpperCase() %></p>
+            <p><%= restaurant.address %></p>
+          </li>
+        </a>
+      </div>
+
+      <% }) %>
+    </ul>
+  </div>
+</section>
