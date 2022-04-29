@@ -18,4 +18,9 @@
     a {
         color: $secondary-text-color;
     }
+
+    p:nth-child(1) {
+        font-size: 1.3em;
+        letter-spacing: .12em;
+    }
 }

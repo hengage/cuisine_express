@@ -259,4 +259,9 @@ header li a {
 .card a {
   color: white;
 }
+
+.card p:nth-child(1) {
+  font-size: 1.3em;
+  letter-spacing: .12em;
+}
 /*# sourceMappingURL=app.css.map */
