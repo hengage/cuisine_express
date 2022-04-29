@@ -1,7 +1,10 @@
-* {
-    box-sizing: border-box
-}
+
+@import "components/all";
+
+@import "abstract/all";
 
 @import "layout";
+
 @import "pages/all";
-@import "components/all"
+
+
