@@ -154,3 +154,21 @@ header {
         }
     }
 }
+
+.flash-message {
+    padding-left: 1.5em;
+    // background-color: #000;
+
+    .success-message {
+        color: rgb(22, 236, 22);
+    }
+
+    .error-message {
+        color: #ff0000;
+    }
+
+    .error-message, .success-message{
+        font-size: 1.4em;
+    }
+}
+

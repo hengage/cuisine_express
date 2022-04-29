@@ -58,15 +58,16 @@
     </header>
 
     <div class="flash-message">
-      <% if (flashMessages) { %> <% if (flashMessages.success) { %>
-      <div class="success-message" style="color: rgb(22, 236, 22)">
-        <%= flashMessages.success %>
+      <div class="container">
+        <% if (flashMessages) { %> <% if (flashMessages.success) { %>
+
+        <p class="success-message"><%= flashMessages.success %></p>
+
+        <% } else if (flashMessages.error) { %>
+
+        <p class="error-message"><%= flashMessages.error %></p>
+        <% } %> <% } %>
       </div>
-      <% } else if (flashMessages.error) { %>
-      <div style="color: red" class="error-message">
-        <%= flashMessages.error %>
-      </div>
-      <% } %> <% } %>
     </div>
 
     <%- body %>

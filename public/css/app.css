@@ -188,6 +188,22 @@ header li a {
   }
 }
 
+.flash-message {
+  padding-left: 1.5em;
+}
+
+.flash-message .success-message {
+  color: #16ec16;
+}
+
+.flash-message .error-message {
+  color: #ff0000;
+}
+
+.flash-message .error-message, .flash-message .success-message {
+  font-size: 1.4em;
+}
+
 .restaurant-detail {
   margin-top: 1em;
   padding: 1em;
