@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const makeReservationConfirmEmail = (currentUser, date) => {
+const makeReservationConfirmEmail = (currentUser, restaurant, date) => {
     
     const transporter = nodemailer.createTransport({
         host: "smtp.mailtrap.io",
@@ -14,9 +14,15 @@ const makeReservationConfirmEmail = (currentUser, date) => {
     const message = {
         from: "Cuisine Express <noreply@cuisine_express.com>",
         to: currentUser.email,
-        subject: "Nodejs email ",
-        html: `<h2>Your table Reservation has been made successfully</h2>
-        Date is: ${date}`
+        subject: "Table Reservation ",
+        html: `<div style="text-align: center;">
+        <h2>Your table reservation booking was successful</h2>
+        <p>You are getting this email because you booked a table at ${restaurant}.</p>
+
+        <p>Reservation Time: ${date}</p>
+
+        <p>Please endeavour to be present for your dining.</p>
+        </div>`
     }
 
     transporter.sendMail(message, function(err, info) {

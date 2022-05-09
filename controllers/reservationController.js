@@ -19,16 +19,17 @@ module.exports = {
         }
 
         const restaurant = await Restaurant.findOne({ name: req.params.name })
+        console.log('The restaurant found is', restaurant.name)
         if (!restaurant) { console.log('Cant\' find restaurant to create reservation') }
 
-        const reservation = await Reservation.create({ 
+        await Reservation.create({ 
             reservationDateTime: req.body.reservationDateTime,
             user: currentUser.id,
             restaurant: restaurant.id 
         })
           
         req.flash('success', 'Your reservation has been made')
-        makeReservationConfirmEmail(currentUser, req.body.reservationDateTime)
+        makeReservationConfirmEmail(currentUser, restaurant.name, req.body.reservationDateTime)
         res.locals.redirect = `/users/${currentUser.id}`;
 
         next()
