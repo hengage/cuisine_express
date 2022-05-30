@@ -257,8 +257,11 @@ header li a {
 }
 
 .create-reservation {
-  background: #455070;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #455070;
   padding: 1em;
+  border-radius: 1em;
   margin: 0 1em;
   border-bottom-right-radius: 7%;
   text-align: center;

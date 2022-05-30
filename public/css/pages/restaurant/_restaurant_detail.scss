@@ -16,8 +16,7 @@
 }
     
 .create-reservation {
-    background: $secondary-background-color;
-    padding: 1em;
+    @include cards;
     margin: 0 1em;
     border-bottom-right-radius: 7%;
     text-align: center;
