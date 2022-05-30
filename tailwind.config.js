@@ -1,5 +1,9 @@
 module.exports = {
-  content: [],
+  content: [
+    './views/restaurant/*.ejs',
+    './views/users/*.ejs',
+    './views/*.ejs'
+  ],
   theme: {
     extend: {},
   },
