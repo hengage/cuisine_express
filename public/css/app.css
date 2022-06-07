@@ -227,7 +227,6 @@ header li a {
   -webkit-box-flex: 100%;
       -ms-flex: 100%;
           flex: 100%;
-  margin: 0 0 1.5em -2.5em;
 }
 
 .home .card a {
@@ -246,10 +245,6 @@ header li a {
 
 .restaurant-info {
   margin: 0 1em 3em 1em;
-}
-
-.restaurant-info h2, .restaurant-info p {
-  line-height: 0.2em;
 }
 
 .restaurant-info h2 {
@@ -295,6 +290,5 @@ header li a {
   padding: 1em;
   border-radius: 1em;
   color: white;
-  margin: 0 0 1.5em -2.5em;
 }
 /*# sourceMappingURL=app.css.map */

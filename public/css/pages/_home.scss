@@ -5,19 +5,21 @@
         display: flex;
         flex-direction: column;
     }
+
+    .card {
+        @include cards;
+        flex: 100%;
+        // margin: 0 0 1.5em -2.5em;
+    
+        a {
+            color: $secondary-text-color;
+        }
+    
+        p:nth-child(1) {
+            font-size: 1.3em;
+            letter-spacing: .12em;
+        }
+    }
 }
 
-.home .card {
-    @include cards;
-    flex: 100%;
-    margin: 0 0 1.5em -2.5em;
 
-    a {
-        color: $secondary-text-color;
-    }
-
-    p:nth-child(1) {
-        font-size: 1.3em;
-        letter-spacing: .12em;
-    }
-}
