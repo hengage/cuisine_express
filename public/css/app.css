@@ -32,12 +32,12 @@ a {
 }
 
 header {
-  background: white;
+  background: #455070;
   margin: 0;
   padding: 0 .7em;
 }
 
-header .container {
+header .contain {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,16 +47,18 @@ header .container {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  padding-bottom: 1em;
 }
 
 @media only screen and (min-width: 1024px) {
-  header .container {
+  header .contain {
     place-content: space-between;
   }
 }
 
 header h3 {
   font-size: 1.6em;
+  color: white;
   margin-top: 1em;
 }
 

@@ -18,14 +18,15 @@ a {
 }
 
 header {
-    background: white;
+    background: $secondary-background-color;
     margin: 0;
     padding: 0 .7em;
 
-    .container {
+    .contain {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+        padding-bottom: 1em;
 
         @include for_breakpoint(desktop) {
             place-content: space-between;
@@ -35,6 +36,7 @@ header {
     h3 {
         font-size: 1.6em;
         // background-color: blue;
+        color: $secondary-text-color;
         margin-top: 1em;
 
         span{
