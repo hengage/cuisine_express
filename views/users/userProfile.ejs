@@ -6,19 +6,43 @@
     <p><a href="<%= `/users/${user.id}/edit` %>">Edit Profile</a></p>
   </div>
 
+  <div class="reservation">
+    <h2 class="text-2xl">Table Reservations</h2>
 
-  <ul>
-    <% userReservation.forEach(reservation=> { %>
-    <div class="card">
-      <li class="space-y-4">
-        <p><span class="font-bold">Reservation code:</span>  <%= reservation.code %></p>
-        <p><span class="font-bold">Restaurant:</span> <%= reservation.restaurant.name %></p>
-        <p><span class="font-bold">Date:</span> <%= reservation.reservationDateTime %></p>
-        <p><span class="font-bold">Restaurant address</span>: <%= reservation.restaurant.address %></p>
-      </li>
-    </div>
-    <% }) %>
-  </ul>
+    <% if (userReservation.length > 0) { %>
+    <p>You have <%= userReservation.length %> upcoming reservation(s)</p>
+    <% } else { %>
+    <p>
+      You have no upcoming reservation. Book a reservation at your favorite
+      restaurant
+    </p>
+    <% } %>
+
+    <ul class="mt-4">
+      <% userReservation.forEach(reservation=> { %>
+      <div class="card">
+        <li class="space-y-4">
+          <p>
+            <span class="font-bold">Reservation code:</span> <%=
+            reservation.code %>
+          </p>
+          <p>
+            <span class="font-bold">Restaurant:</span> <%=
+            reservation.restaurant.name %>
+          </p>
+          <p>
+            <span class="font-bold">Date:</span> <%=
+            reservation.reservationDateTime %>
+          </p>
+          <p>
+            <span class="font-bold">Restaurant address</span>: <%=
+            reservation.restaurant.address %>
+          </p>
+        </li>
+      </div>
+      <% }) %>
+    </ul>
+  </div>
 
   <button
     onclick="return confirm('Are you sure you want to delete your account?') "
