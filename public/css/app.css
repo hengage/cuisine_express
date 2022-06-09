@@ -293,4 +293,12 @@ header li a {
   border-radius: 1em;
   color: white;
 }
+
+.user-login-container {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #455070;
+  padding: 1em;
+  border-radius: 1em;
+}
 /*# sourceMappingURL=app.css.map */
