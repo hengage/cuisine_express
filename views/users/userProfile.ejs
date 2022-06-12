@@ -1,21 +1,48 @@
-<section class="user-profile">
-  <h2><%= user.fullName %></h2>
-  <p><%= user.email %></p>
+<section class="user-profile space-y-8">
+  <div class="space-y-3">
+    <h2 class="text-2xl font-extrabold"><%= user.fullName %></h2>
+    <p><%= user.email %></p>
 
-  <a href="<%= `/users/${user.id}/edit` %>">Edit Profile</a>
+    <p><a href="<%= `/users/${user.id}/edit` %>">Edit Profile</a></p>
+  </div>
 
-  <ul>
-    <% userReservation.forEach(reservation=> { %>
-    <div class="card">
-      <li>
-        <p>Reservation code: <%= reservation.code %></p>
-        <p>Restaurant: <%= reservation.restaurant.name %></p>
-        <p>Date: <%= reservation.reservationDateTime %></p>
-        <p>Restaurant address: <%= reservation.restaurant.address %></p>
-      </li>
-    </div>
-    <% }) %>
-  </ul>
+  <div class="reservation">
+    <h2 class="text-2xl">Table Reservations</h2>
+
+    <% if (userReservation.length > 0) { %>
+    <p>You have <%= userReservation.length %> upcoming reservation(s)</p>
+    <% } else { %>
+    <p>
+      You have no upcoming reservation. Book a reservation at your favorite
+      restaurant
+    </p>
+    <% } %>
+
+    <ul class="mt-4">
+      <% userReservation.forEach(reservation=> { %>
+      <div class="card">
+        <li class="space-y-4">
+          <p>
+            <span class="font-bold">Reservation code:</span> <%=
+            reservation.code %>
+          </p>
+          <p>
+            <span class="font-bold">Restaurant:</span> <%=
+            reservation.restaurant.name %>
+          </p>
+          <p>
+            <span class="font-bold">Date:</span> <%=
+            reservation.reservationDateTime %>
+          </p>
+          <p>
+            <span class="font-bold">Restaurant address</span>: <%=
+            reservation.restaurant.address %>
+          </p>
+        </li>
+      </div>
+      <% }) %>
+    </ul>
+  </div>
 
   <button
     onclick="return confirm('Are you sure you want to delete your account?') "

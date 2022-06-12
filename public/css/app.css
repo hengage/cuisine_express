@@ -32,12 +32,12 @@ a {
 }
 
 header {
-  background: white;
+  background: #455070;
   margin: 0;
   padding: 0 .7em;
 }
 
-header .container {
+header .contain {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,16 +47,18 @@ header .container {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  padding-bottom: 1em;
 }
 
 @media only screen and (min-width: 1024px) {
-  header .container {
+  header .contain {
     place-content: space-between;
   }
 }
 
 header h3 {
   font-size: 1.6em;
+  color: white;
   margin-top: 1em;
 }
 
@@ -78,6 +80,7 @@ header nav {
   position: fixed;
   right: 0;
   top: 0;
+  z-index: 99;
   width: 100%;
   height: 70vh;
 }
@@ -227,7 +230,6 @@ header li a {
   -webkit-box-flex: 100%;
       -ms-flex: 100%;
           flex: 100%;
-  margin: 0 0 1.5em -2.5em;
 }
 
 .home .card a {
@@ -248,17 +250,16 @@ header li a {
   margin: 0 1em 3em 1em;
 }
 
-.restaurant-info h2, .restaurant-info p {
-  line-height: 0.2em;
-}
-
 .restaurant-info h2 {
   font-size: 1.8em;
 }
 
 .create-reservation {
-  background: #455070;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #455070;
   padding: 1em;
+  border-radius: 1em;
   margin: 0 1em;
   border-bottom-right-radius: 7%;
   text-align: center;
@@ -292,6 +293,13 @@ header li a {
   padding: 1em;
   border-radius: 1em;
   color: white;
-  margin: 0 0 1.5em -2.5em;
+}
+
+.user-login-container {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #455070;
+  padding: 1em;
+  border-radius: 1em;
 }
 /*# sourceMappingURL=app.css.map */

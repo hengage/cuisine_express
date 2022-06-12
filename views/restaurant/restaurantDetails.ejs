@@ -1,13 +1,13 @@
 <section class="restaurant-detail">
   <div class="container">
     <div class="restaurant-info">
-      <h2><%= restaurant.name.toUpperCase() %></h2>
+      <h2 class="font-extrabold"><%= restaurant.name.toUpperCase() %></h2>
       <p><%= restaurant.address %></p>
       <p><%= restaurant.zipCode %></p>
     </div>
 
     <form class="create-reservation" method="post">
-      <h2>Make a table reservation</h2>
+      <h2 class="text-2xl mb-3">Make a table reservation</h2>
 
       <!-- <label for="reservationDateTime">Select date and time </label> -->
       <p>Select a date and time for your dining and proceed to book a table</p>
@@ -17,6 +17,7 @@
         name="reservationDateTime"
         value="ee"
         required
+        class="mb-4 mt-4"
       />
       <button type="submit">Create reservation</button>
     </form>
